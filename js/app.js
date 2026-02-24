@@ -571,7 +571,6 @@
                 statusEl.className = 'submit-status submit-status--info';
                 if (textEl) textEl.textContent = '⚠️ 백엔드 미설정 — 로컬에 저장되었습니다.';
             }
-            // Save locally for admin fallback
             saveResponseLocally(data);
             return;
         }
@@ -588,28 +587,28 @@
         while (retries >= 0 && !success) {
             try {
                 const controller = new AbortController();
-                const timeout = setTimeout(() => controller.abort(), DRM_CONFIG.SUBMIT_TIMEOUT_MS || 10000);
+                const timeout = setTimeout(() => controller.abort(), DRM_CONFIG.SUBMIT_TIMEOUT_MS || 15000);
 
-                const response = await fetch(DRM_CONFIG.GAS_ENDPOINT, {
+                // Google Apps Script redirects on POST, so we use no-cors mode.
+                // The data IS sent and processed by GAS, but we get an opaque response.
+                await fetch(DRM_CONFIG.GAS_ENDPOINT, {
                     method: 'POST',
                     body: JSON.stringify(data),
-                    headers: { 'Content-Type': 'text/plain' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    mode: 'no-cors',
+                    redirect: 'follow',
                     signal: controller.signal,
                 });
                 clearTimeout(timeout);
 
-                const result = await response.json();
-
-                if (result.success) {
-                    success = true;
-                    if (statusEl) {
-                        statusEl.className = 'submit-status submit-status--success';
-                        if (textEl) textEl.textContent = '✅ 응답이 성공적으로 제출되었습니다!';
-                    }
-                    showToast('응답이 제출되었습니다!');
-                } else {
-                    throw new Error(result.error || '서버 오류');
+                // If fetch didn't throw, data was sent successfully
+                success = true;
+                if (statusEl) {
+                    statusEl.className = 'submit-status submit-status--success';
+                    if (textEl) textEl.textContent = '✅ 응답이 성공적으로 제출되었습니다!';
                 }
+                showToast('응답이 제출되었습니다!');
+
             } catch (err) {
                 retries--;
                 if (retries < 0) {
