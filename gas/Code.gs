@@ -1,73 +1,71 @@
-/**
- * ============================================================
- * DRM 설문 — Google Apps Script 백엔드
- * ============================================================
- * 
- * 【 배포 방법 】
- * 
- * 1. Google Drive (drive.google.com) 접속
- * 2. "새로 만들기" → "Google 스프레드시트" 생성
- *    - 시트 이름을 "Responses"로 변경
- *    - 첫 행(헤더)에 아래 내용 입력:
- *      timestamp | respondentId | episodesJson | diagnosesJson | barrier | schoolMessage | summary
- * 
- * 3. "확장 프로그램" → "Apps Script" 클릭
- * 4. 기존 코드를 모두 지우고 이 파일(Code.gs)의 내용을 붙여넣기
- * 5. 아래 ADMIN_PASSWORD를 원하는 비밀번호로 변경
- * 6. "배포" → "새 배포" 클릭
- *    - 유형: "웹 앱"
- *    - 실행 사용자: "나"
- *    - 액세스 권한: "모든 사용자"
- *    - "배포" 클릭
- * 7. 생성된 URL을 복사하여 js/config.js의 GAS_ENDPOINT에 붙여넣기
- * 
- * 【 업데이트 배포 】
- * - 코드 수정 후 "배포" → "배포 관리" → "새 버전" 으로 업데이트
- * 
- * ============================================================
- */
+// ========================================================
+// DRM Survey — Google Apps Script Backend
+// 3개 시트에 개별 셀로 저장
+//   - Responses : 응답 종합 (1행 = 1명)
+//   - Episodes  : 에피소드 (1행 = 1에피소드)
+//   - Diagnoses : 진단 결과 (1행 = 1진단)
+// ========================================================
 
-// ★ 관리자 비밀번호 (반드시 변경하세요!)
+// ★ 관리자 비밀번호
 const ADMIN_PASSWORD = 'drm2026admin';
 
-// 스프레드시트 시트 이름
-const SHEET_NAME = 'Responses';
-
-/**
- * POST 요청 처리 — 학생 응답 저장
- */
+// ──────────────── POST: 설문 저장 ────────────────
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    
-    if (!sheet) {
-      return createJsonResponse({ success: false, error: 'Sheet not found' });
-    }
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
 
-    // 고유 응답자 ID 생성
     const respondentId = Utilities.getUuid();
     const timestamp = new Date().toISOString();
 
-    // 요약 정보 계산
-    const episodeCount = data.episodes ? data.episodes.length : 0;
-    const diagnosisCount = data.diagnoses ? data.diagnoses.length : 0;
-    
-    // 행 추가
-    sheet.appendRow([
-      timestamp,
-      respondentId,
-      JSON.stringify(data.episodes || []),
-      JSON.stringify(data.diagnoses || []),
-      data.globalReflection ? data.globalReflection.biggestBarrier || '' : '',
-      data.globalReflection ? data.globalReflection.schoolMessage || '' : '',
-      `에피소드 ${episodeCount}개, 진단 ${diagnosisCount}개`
+    const episodes = data.episodes || [];
+    const diagnoses = data.diagnoses || [];
+    const barrier = data.globalReflection ? data.globalReflection.biggestBarrier || '' : '';
+    const schoolMsg = data.globalReflection ? data.globalReflection.schoolMessage || '' : '';
+
+    // 1) Responses 시트 — 종합 정보
+    const respSheet = getOrCreateSheet(ss, 'Responses', [
+      '응답시각', '응답자ID', '에피소드수', '진단수', '가장큰장벽', '학교에바라는말'
+    ]);
+    respSheet.appendRow([
+      timestamp, respondentId,
+      episodes.length, diagnoses.length,
+      barrier, schoolMsg
     ]);
 
-    return createJsonResponse({ 
-      success: true, 
+    // 2) Episodes 시트 — 에피소드 상세
+    const epSheet = getOrCreateSheet(ss, 'Episodes', [
+      '응답자ID', '에피소드번호', '시작시간', '종료시간', '활동내용', '장소', '동행인'
+    ]);
+    episodes.forEach(function(ep, i) {
+      epSheet.appendRow([
+        respondentId, i + 1,
+        ep.startTime || '', ep.endTime || '',
+        ep.activity || '', ep.location || '', ep.companion || ''
+      ]);
+    });
+
+    // 3) Diagnoses 시트 — 진단 상세
+    const diagSheet = getOrCreateSheet(ss, 'Diagnoses', [
+      '응답자ID', '에피소드ID', '활동', '정보', '정보원', '시간지각',
+      '기회_선택', '기회_유연', '즐거움', '자신감', '불안함', '지루함'
+    ]);
+    diagnoses.forEach(function(d) {
+      diagSheet.appendRow([
+        respondentId, d.episodeId || '',
+        d.activity || '', d.information || '', d.informationSource || '',
+        d.time || '', d.opportunityChosen || '', d.opportunityFlexible || '',
+        d.wellbeing_joy != null ? d.wellbeing_joy : '',
+        d.wellbeing_confidence != null ? d.wellbeing_confidence : '',
+        d.wellbeing_anxiety != null ? d.wellbeing_anxiety : '',
+        d.wellbeing_boredom != null ? d.wellbeing_boredom : ''
+      ]);
+    });
+
+    return createJsonResponse({
+      success: true,
       respondentId: respondentId,
-      message: '응답이 저장되었습니다.'
+      message: 'saved'
     });
 
   } catch (error) {
@@ -75,50 +73,73 @@ function doPost(e) {
   }
 }
 
-/**
- * GET 요청 처리 — 관리자 데이터 조회
- */
+// ──────────────── GET: 관리자 데이터 조회 ────────────────
 function doGet(e) {
   try {
-    const password = e.parameter.password;
-    const action = e.parameter.action || 'list';
-
-    // 비밀번호 검증
+    var password = e.parameter.password;
     if (password !== ADMIN_PASSWORD) {
-      return createJsonResponse({ success: false, error: '인증 실패: 비밀번호가 올바르지 않습니다.' });
+      return createJsonResponse({ success: false, error: 'auth failed' });
     }
 
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    if (!sheet) {
-      return createJsonResponse({ success: false, error: 'Sheet not found' });
-    }
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
 
-    const lastRow = sheet.getLastRow();
-    
-    if (lastRow <= 1) {
+    // 1) Responses 읽기
+    var respSheet = ss.getSheetByName('Responses');
+    if (!respSheet || respSheet.getLastRow() <= 1) {
       return createJsonResponse({ success: true, data: [], count: 0 });
     }
+    var respData = respSheet.getRange(2, 1, respSheet.getLastRow() - 1, 6).getValues();
 
-    // 헤더 행 제외하고 데이터 가져오기
-    const dataRange = sheet.getRange(2, 1, lastRow - 1, 7);
-    const values = dataRange.getValues();
+    // 2) Episodes 읽기 → respondentId별 그룹
+    var episodesMap = {};
+    var epSheet = ss.getSheetByName('Episodes');
+    if (epSheet && epSheet.getLastRow() > 1) {
+      var epRows = epSheet.getRange(2, 1, epSheet.getLastRow() - 1, 7).getValues();
+      epRows.forEach(function(row) {
+        var rid = row[0];
+        if (!episodesMap[rid]) episodesMap[rid] = [];
+        episodesMap[rid].push({
+          id: row[1], startTime: row[2], endTime: row[3],
+          activity: row[4], location: row[5], companion: row[6]
+        });
+      });
+    }
 
-    const responses = values.map(function(row) {
+    // 3) Diagnoses 읽기 → respondentId별 그룹
+    var diagMap = {};
+    var diagSheet = ss.getSheetByName('Diagnoses');
+    if (diagSheet && diagSheet.getLastRow() > 1) {
+      var dRows = diagSheet.getRange(2, 1, diagSheet.getLastRow() - 1, 12).getValues();
+      dRows.forEach(function(row) {
+        var rid = row[0];
+        if (!diagMap[rid]) diagMap[rid] = [];
+        diagMap[rid].push({
+          episodeId: row[1], activity: row[2],
+          information: row[3], informationSource: row[4], time: row[5],
+          opportunityChosen: row[6], opportunityFlexible: row[7],
+          wellbeing_joy: row[8], wellbeing_confidence: row[9],
+          wellbeing_anxiety: row[10], wellbeing_boredom: row[11]
+        });
+      });
+    }
+
+    // 4) 조합하여 반환
+    var responses = respData.map(function(row) {
+      var rid = row[1];
       return {
         timestamp: row[0] instanceof Date ? row[0].toISOString() : row[0],
-        respondentId: row[1],
-        episodes: tryParse(row[2]),
-        diagnoses: tryParse(row[3]),
+        respondentId: rid,
+        episodes: episodesMap[rid] || [],
+        diagnoses: diagMap[rid] || [],
         barrier: row[4],
-        schoolMessage: row[5],
-        summary: row[6]
+        schoolMessage: row[5]
       };
     });
 
-    return createJsonResponse({ 
-      success: true, 
-      data: responses, 
-      count: responses.length 
+    return createJsonResponse({
+      success: true,
+      data: responses,
+      count: responses.length
     });
 
   } catch (error) {
@@ -126,20 +147,22 @@ function doGet(e) {
   }
 }
 
-/**
- * JSON 안전 파싱
- */
-function tryParse(str) {
-  try {
-    return JSON.parse(str);
-  } catch (e) {
-    return str;
+// ──────────────── 유틸리티 ────────────────
+function getOrCreateSheet(ss, name, headers) {
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
+    // 헤더 서식
+    var headerRange = sheet.getRange(1, 1, 1, headers.length);
+    headerRange.setFontWeight('bold');
+    headerRange.setBackground('#4a86c8');
+    headerRange.setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
   }
+  return sheet;
 }
 
-/**
- * CORS 대응 JSON 응답 생성
- */
 function createJsonResponse(data) {
   return ContentService
     .createTextOutput(JSON.stringify(data))
