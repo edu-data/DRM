@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRM 설문 — 일상재구성법 기반 고교생 진로 진단</title>
+  <meta name="description" content="일상재구성법(DRM)을 활용하여 고교생의 정보·시간·기회 접근성과 웰빙을 진단하는 연구 설문입니다." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <span class="app-header__badge">Research Survey 2026</span>
+    <h1 class="app-header__title">일상재구성법(DRM) 설문</h1>
+    <p class="app-header__subtitle">
+      어제의 일과를 에피소드 단위로 되돌아보며, 나의 일상 속 <strong>정보</strong>·<strong>시간</strong>·<strong>기회</strong>를 진단합니다.
+    </p>
+  </header>
+
+  <!-- ===== PROGRESS BAR ===== -->
+  <nav class="progress-bar" id="progressBar">
+    <div class="progress-step active" data-step="1">
+      <div class="progress-step__circle">1
+        <span class="progress-step__label">일과 재구성</span>
+      </div>
+    </div>
+    <div class="progress-step" data-step="1-2">
+      <div class="progress-step__line"></div>
+    </div>
+    <div class="progress-step" data-step="2">
+      <div class="progress-step__circle">2
+        <span class="progress-step__label">심층 진단</span>
+      </div>
+    </div>
+    <div class="progress-step" data-step="2-3">
+      <div class="progress-step__line"></div>
+    </div>
+    <div class="progress-step" data-step="3">
+      <div class="progress-step__circle">3
+        <span class="progress-step__label">종합 제언</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       PART 1: 일과 재구성 (Diary Construction)
+       ============================================================ -->
+  <section class="part-section active" id="part1">
+    <h2 class="part-title">PART 1. 어제의 일과 재구성</h2>
+    <p class="part-description">
+      어제 하루를 기억나는 대로 <strong>10~15개의 에피소드</strong>로 나누어 주세요.<br />
+      예: 등교, 1교시 수업, 점심시간, 방과 후 활동, 유튜브 시청 등
+    </p>
+
+    <div class="episode-count" id="episodeCount">
+      <span>📝</span> <span id="episodeCountText">에피소드 0개</span>
+    </div>
+
+    <div id="episodeList">
+      <!-- Episodes are dynamically added here -->
+    </div>
+
+    <button class="add-episode-btn" id="addEpisodeBtn" type="button">
+      ＋ 에피소드 추가
+    </button>
+
+    <div class="nav-buttons">
+      <div></div>
+      <button class="btn btn-primary" id="toPart2Btn" type="button">
+        다음: 심층 진단 →
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PART 2: 에피소드별 심층 진단
+       ============================================================ -->
+  <section class="part-section" id="part2">
+    <h2 class="part-title">PART 2. 에피소드별 심층 진단</h2>
+    <p class="part-description">
+      위에서 기록한 에피소드 중 <strong>가장 기억에 남는 3~5개</strong>를 골라주세요.
+    </p>
+
+    <!-- Step 2a: Selection -->
+    <div id="part2Selection">
+      <p class="select-hint">✨ 3~5개의 에피소드를 선택해 주세요</p>
+      <div class="episode-select-grid" id="episodeSelectGrid">
+        <!-- Dynamically populated -->
+      </div>
+      <div id="selectedCountBadge" class="episode-count">
+        <span>✅</span> <span id="selectedCountText">0개 선택됨</span>
+      </div>
+      <button class="btn btn-primary btn-block" id="startDiagnosisBtn" type="button">
+        선택 완료 — 진단 시작
+      </button>
+    </div>
+
+    <!-- Step 2b: Diagnosis Forms -->
+    <div id="part2Diagnosis" style="display:none;">
+      <div id="diagnosisForms">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="backToPart1Btn" type="button">
+        ← 이전
+      </button>
+      <button class="btn btn-primary" id="toPart3Btn" type="button">
+        다음: 종합 진단 →
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PART 3: 종합 진단 및 제언
+       ============================================================ -->
+  <section class="part-section" id="part3">
+    <h2 class="part-title">PART 3. 종합 진단 및 제언</h2>
+    <p class="part-description">
+      어제 하루를 종합적으로 돌아보며 나의 일상에 대해 성찰합니다.
+    </p>
+
+    <!-- Summary Dashboard -->
+    <div class="summary-dashboard" id="summaryDashboard">
+      <div class="summary-stat">
+        <div class="summary-stat__value" id="statEpisodes">0</div>
+        <div class="summary-stat__label">총 에피소드</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-stat__value" id="statDiagnosed">0</div>
+        <div class="summary-stat__label">진단 에피소드</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-stat__value" id="statAvgWellbeing">-</div>
+        <div class="summary-stat__label">평균 웰빙 점수</div>
+      </div>
+    </div>
+
+    <!-- Q1: Biggest Barrier -->
+    <div class="glass-card">
+      <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.8rem;">
+        어제의 가장 큰 장벽
+      </h3>
+      <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+        어제 하루 중 나의 성장을 가장 가로막았던 '결핍'은 무엇인가요?
+      </p>
+      <div class="barrier-options" id="barrierOptions">
+        <label class="barrier-option" data-value="information">
+          <input type="radio" name="barrier" value="information" />
+          <div class="barrier-option__icon">📡</div>
+          <div class="barrier-option__content">
+            <div class="barrier-option__title">정보의 결핍</div>
+            <div class="barrier-option__desc">무엇을 해야 할지 모르겠음</div>
+          </div>
+        </label>
+        <label class="barrier-option" data-value="time">
+          <input type="radio" name="barrier" value="time" />
+          <div class="barrier-option__icon">⏳</div>
+          <div class="barrier-option__content">
+            <div class="barrier-option__title">시간의 결핍</div>
+            <div class="barrier-option__desc">너무 바쁘거나, 의미 없이 버려지는 시간이 많음</div>
+          </div>
+        </label>
+        <label class="barrier-option" data-value="opportunity">
+          <input type="radio" name="barrier" value="opportunity" />
+          <div class="barrier-option__icon">🚪</div>
+          <div class="barrier-option__content">
+            <div class="barrier-option__title">기회의 결핍</div>
+            <div class="barrier-option__desc">내가 원하는 과목이나 활동을 할 수 없음</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q2: Message to School -->
+    <div class="glass-card">
+      <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">
+        🏫 학교에 바라는 한 마디
+      </h3>
+      <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+        "내가 만약 학교를 직접 설계할 수 있다면, 나의 일상을 위해 <strong>[이것]</strong>만은 꼭 바꾸고 싶다!"
+      </p>
+      <textarea class="form-textarea" id="schoolMessage"
+        placeholder="자유롭게 적어 주세요..." rows="4"></textarea>
+    </div>
+
+    <!-- Navigation & Export -->
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="backToPart2Btn" type="button">
+        ← 이전
+      </button>
+      <button class="btn btn-primary" id="completeBtn" type="button">
+        ✅ 설문 완료
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMPLETION SCREEN
+       ============================================================ -->
+  <section class="part-section" id="completionScreen">
+    <div class="completion-screen">
+      <div class="completion-screen__icon">🎉</div>
+      <h2 class="completion-screen__title">설문이 완료되었습니다!</h2>
+      <p class="completion-screen__desc">
+        소중한 응답에 감사드립니다. 아래 버튼으로 데이터를 내보낼 수 있습니다.
+      </p>
+      <div class="export-buttons">
+        <button class="btn btn-primary" id="exportJsonBtn" type="button">
+          📄 JSON 다운로드
+        </button>
+        <button class="btn btn-secondary" id="exportCsvBtn" type="button">
+          📊 CSV 다운로드
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.app-container -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
