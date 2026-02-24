@@ -560,6 +560,82 @@
         setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
     }
 
+    // ──────────────── Submit to Backend ────────────────
+    async function submitToBackend(data) {
+        const statusEl = $('#submitStatus');
+        const textEl = statusEl?.querySelector('.submit-status__text');
+
+        // Check if endpoint is configured
+        if (typeof DRM_CONFIG === 'undefined' || !DRM_CONFIG.GAS_ENDPOINT) {
+            if (statusEl) {
+                statusEl.className = 'submit-status submit-status--info';
+                if (textEl) textEl.textContent = '⚠️ 백엔드 미설정 — 로컬에 저장되었습니다.';
+            }
+            // Save locally for admin fallback
+            saveResponseLocally(data);
+            return;
+        }
+
+        if (statusEl) {
+            statusEl.style.display = 'flex';
+            statusEl.className = 'submit-status submit-status--loading';
+            if (textEl) textEl.textContent = '응답을 제출하고 있습니다...';
+        }
+
+        let retries = DRM_CONFIG.RETRY_COUNT || 2;
+        let success = false;
+
+        while (retries >= 0 && !success) {
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), DRM_CONFIG.SUBMIT_TIMEOUT_MS || 10000);
+
+                const response = await fetch(DRM_CONFIG.GAS_ENDPOINT, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'text/plain' },
+                    signal: controller.signal,
+                });
+                clearTimeout(timeout);
+
+                const result = await response.json();
+
+                if (result.success) {
+                    success = true;
+                    if (statusEl) {
+                        statusEl.className = 'submit-status submit-status--success';
+                        if (textEl) textEl.textContent = '✅ 응답이 성공적으로 제출되었습니다!';
+                    }
+                    showToast('응답이 제출되었습니다!');
+                } else {
+                    throw new Error(result.error || '서버 오류');
+                }
+            } catch (err) {
+                retries--;
+                if (retries < 0) {
+                    if (statusEl) {
+                        statusEl.className = 'submit-status submit-status--error';
+                        if (textEl) textEl.textContent = '❌ 제출 실패 — 로컬에 저장되었습니다. 나중에 다시 시도해 주세요.';
+                    }
+                    showToast('제출 실패. 로컬에 저장되었습니다.', 'error');
+                    saveResponseLocally(data);
+                }
+            }
+        }
+    }
+
+    function saveResponseLocally(data) {
+        try {
+            const existing = JSON.parse(localStorage.getItem('drm_submitted_responses') || '[]');
+            existing.push({
+                ...data,
+                respondentId: 'local_' + Date.now(),
+                submittedAt: new Date().toISOString(),
+            });
+            localStorage.setItem('drm_submitted_responses', JSON.stringify(existing));
+        } catch (e) { /* ignore */ }
+    }
+
     // ──────────────── Local Storage ────────────────
     function saveState() {
         try {
@@ -704,10 +780,14 @@
             goToPart(2);
         });
 
-        completeBtn.addEventListener('click', () => {
+        completeBtn.addEventListener('click', async () => {
             state.schoolMessage = $('#schoolMessage').value;
             saveState();
             goToPart('done');
+
+            // Submit to Google Apps Script
+            const data = collectAllData();
+            await submitToBackend(data);
         });
 
         exportJsonBtn.addEventListener('click', exportJSON);

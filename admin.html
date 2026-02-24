@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRM 설문 — 관리자 대시보드</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <script src="js/config.js"></script>
+</head>
+
+<body>
+
+    <!-- ================================ LOGIN GATE ================================ -->
+    <div id="loginGate" class="login-gate">
+        <div class="glass-card login-card">
+            <div class="login-card__icon">🔒</div>
+            <h1 class="login-card__title">관리자 인증</h1>
+            <p class="login-card__subtitle">DRM 설문 데이터에 접근하려면 비밀번호를 입력하세요.</p>
+            <div class="form-group">
+                <label class="form-label" for="adminPassword">비밀번호</label>
+                <input type="password" id="adminPassword" class="form-input" placeholder="관리자 비밀번호 입력"
+                    autocomplete="off" />
+            </div>
+            <button id="loginBtn" class="btn btn-primary btn-block" type="button">로그인</button>
+            <p id="loginError" class="login-error" style="display:none;"></p>
+            <a href="index.html" class="login-card__back">← 설문 페이지로 돌아가기</a>
+        </div>
+    </div>
+
+    <!-- ================================ ADMIN DASHBOARD ================================ -->
+    <div id="adminDashboard" class="admin-dashboard" style="display:none;">
+
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-header__left">
+                <h1 class="admin-header__title">📊 DRM 관리자 대시보드</h1>
+                <p class="admin-header__subtitle">학생 설문 응답 관리</p>
+            </div>
+            <div class="admin-header__right">
+                <button id="refreshBtn" class="btn btn-secondary btn-sm" type="button">🔄 새로고침</button>
+                <button id="logoutBtn" class="btn btn-danger btn-sm" type="button">로그아웃</button>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="glass-card stat-card">
+                <div class="stat-card__icon">📝</div>
+                <div class="stat-card__value" id="statTotalResponses">0</div>
+                <div class="stat-card__label">총 응답 수</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-card__icon">📅</div>
+                <div class="stat-card__value" id="statTodayResponses">0</div>
+                <div class="stat-card__label">오늘 응답</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-card__icon">📡</div>
+                <div class="stat-card__value" id="statBarrierInfo">0</div>
+                <div class="stat-card__label">정보 결핍</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-card__icon">⏳</div>
+                <div class="stat-card__value" id="statBarrierTime">0</div>
+                <div class="stat-card__label">시간 결핍</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-card__icon">🚪</div>
+                <div class="stat-card__value" id="statBarrierOpp">0</div>
+                <div class="stat-card__label">기회 결핍</div>
+            </div>
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="glass-card export-section">
+            <h2 class="export-section__title">📥 데이터 다운로드</h2>
+            <p class="export-section__desc">수집된 전체 응답 데이터를 내려받습니다.</p>
+            <div class="export-section__buttons">
+                <button id="exportAllJson" class="btn btn-primary" type="button">📋 JSON 전체 다운로드</button>
+                <button id="exportAllCsv" class="btn btn-accent" type="button">📊 CSV 전체 다운로드</button>
+                <button id="exportEpisodeCsv" class="btn btn-secondary" type="button">🗂️ 에피소드 CSV</button>
+                <button id="exportDiagnosisCsv" class="btn btn-secondary" type="button">🔬 진단 CSV</button>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading-indicator" style="display:none;">
+            <div class="loading-spinner"></div>
+            <p>데이터를 불러오는 중...</p>
+        </div>
+
+        <!-- No Endpoint Warning -->
+        <div id="noEndpointWarning" class="glass-card warning-card" style="display:none;">
+            <h3>⚠️ Google Apps Script 미설정</h3>
+            <p><code>js/config.js</code>의 <code>GAS_ENDPOINT</code>가 비어 있습니다.</p>
+            <p><code>gas/Code.gs</code> 파일의 배포 방법을 따라 Google Apps Script를 배포한 후,
+                생성된 URL을 <code>js/config.js</code>에 입력하세요.</p>
+        </div>
+
+        <!-- Response Table -->
+        <div class="glass-card table-section">
+            <div class="table-section__header">
+                <h2 class="table-section__title">📋 응답 목록</h2>
+                <span class="table-section__count" id="tableCount"></span>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table" id="responseTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>응답 시각</th>
+                            <th>에피소드 수</th>
+                            <th>진단 수</th>
+                            <th>가장 큰 장벽</th>
+                            <th>학교에 바라는 한 마디</th>
+                            <th>상세</th>
+                        </tr>
+                    </thead>
+                    <tbody id="responseTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Detail Modal -->
+        <div id="detailModal" class="modal-overlay" style="display:none;">
+            <div class="glass-card modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-header__title">📄 응답 상세</h2>
+                    <button id="closeModal" class="btn btn-secondary btn-sm" type="button">✕ 닫기</button>
+                </div>
+                <div id="modalContent" class="modal-content"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
