@@ -6,7 +6,7 @@
 const DRM_CONFIG = {
     // ★ Google Apps Script 배포 URL을 여기에 붙여넣으세요
     // 예: 'https://script.google.com/macros/s/AKfycb.../exec'
-    GAS_ENDPOINT: '',
+    GAS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbxFIPwHW4FB66YfwwvYqYCsVrlcvdGoWH-QR7hzTbt9Tjg8LS-z20ag18PpdLhKMYjU/exec',
 
     // 관리자 비밀번호 (Google Apps Script의 ADMIN_PASSWORD와 동일하게 설정)
     ADMIN_PASSWORD: 'drm2026admin',
