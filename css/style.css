@@ -1781,3 +1781,95 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.78rem;
   color: var(--text-secondary);
 }
+
+/* ========================================
+   PART 1: EPISODE EXAMPLE TABLE
+   ======================================== */
+.episode-example {
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+.episode-example__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+
+.episode-example__desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+}
+
+.episode-example__table {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 0.8rem;
+}
+
+.episode-example__row {
+  display: grid;
+  grid-template-columns: 60px 100px 1fr 100px 120px;
+  gap: 0;
+}
+
+.episode-example__row--header {
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.episode-example__row--header .episode-example__cell {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.episode-example__cell {
+  padding: 0.45rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  border-bottom: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+}
+
+.episode-example__cell:last-child {
+  border-right: none;
+}
+
+.episode-example__row:last-child .episode-example__cell {
+  border-bottom: none;
+}
+
+.episode-example__cell--num {
+  font-weight: 700;
+  color: var(--accent-purple);
+  justify-content: center;
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.episode-example__tip {
+  font-size: 0.8rem;
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .episode-example__row {
+    grid-template-columns: 40px 75px 1fr 70px 90px;
+  }
+
+  .episode-example__cell {
+    padding: 0.35rem 0.3rem;
+    font-size: 0.68rem;
+  }
+}
