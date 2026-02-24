@@ -501,6 +501,7 @@
 
         return {
             timestamp: new Date().toISOString(),
+            phoneNumber: $('#phoneNumber')?.value || '',
             episodes: state.episodes.map((ep) => ({
                 id: ep.id,
                 startTime: ep.startTime,

@@ -157,6 +157,21 @@
         </p>
       </div>
 
+      <!-- 사례비 지급을 위한 연락처 -->
+      <div class="glass-card intro-card">
+        <h3 class="intro-card__heading">💰 설문조사 사례비 안내</h3>
+        <p class="intro-card__text">
+          설문에 성실히 참여해 주신 분께 <strong>사례비를 지급</strong>합니다.<br>
+          사례비 지급을 위해 아래 핸드폰 번호를 입력해 주세요.
+        </p>
+        <div class="form-group" style="max-width: 360px; margin: 0.8rem auto 0;">
+          <label class="form-label" for="phoneNumber">📱 핸드폰 번호</label>
+          <input type="tel" class="form-input" id="phoneNumber" placeholder="예: 010-1234-5678"
+            pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"
+            style="text-align: center; font-size: 1.1rem; letter-spacing: 1px;" />
+        </div>
+      </div>
+
       <div class="nav-buttons" style="justify-content:center;">
         <button class="btn btn-primary btn-start-survey" id="startSurveyBtn" type="button">
           📝 설문 시작하기
@@ -797,14 +812,7 @@
           <div class="submit-status__spinner"></div>
           <span class="submit-status__text">응답을 제출하고 있습니다...</span>
         </div>
-        <div class="export-buttons">
-          <button class="btn btn-primary" id="exportJsonBtn" type="button">
-            📄 JSON 다운로드
-          </button>
-          <button class="btn btn-secondary" id="exportCsvBtn" type="button">
-            📊 CSV 다운로드
-          </button>
-        </div>
+
       </div>
     </section>
 
