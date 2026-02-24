@@ -54,46 +54,97 @@
     <section class="part-section active" id="partIntro">
 
       <div class="intro-hero">
-        <div class="intro-hero__icon">📖</div>
-        <h2 class="intro-hero__title">『나의 하루 돌아보기』 조사지</h2>
-        <p class="intro-hero__subtitle">일상재구성법(DRM) 기반 설문</p>
+        <div class="intro-hero__icon">🔬</div>
+        <h2 class="intro-hero__title">일상재구성법(DRM) 설문조사</h2>
+        <p class="intro-hero__subtitle">고교생의 일상 속 정보·시간·기회를 진단합니다</p>
       </div>
 
+      <!-- 연구의 목적 -->
       <div class="glass-card intro-card">
-        <h3 class="intro-card__heading">👋 안녕하세요</h3>
+        <h3 class="intro-card__heading">🎯 연구의 목적</h3>
         <p class="intro-card__text">
-          『나의 하루 돌아보기』는 <strong>어제 하루</strong> 동안 있었던 일과 그 일을 하면서 느꼈던 기분에 대한 것입니다.
+          본 연구는 고교생의 일상을 <strong>정보(Information)</strong>, <strong>시간(Time)</strong>, <strong>기회(Opportunity)</strong>라는
+          세 가지 렌즈로 재구성하여 진단합니다.
         </p>
         <p class="intro-card__text">
-          여러분들이 학교를 포함한 <strong>가정, 학원, 취미 및 휴식시간</strong> 등 일상생활에서 했던 모든 일(활동)을 포함하여 작성하면 됩니다.
+          특히 전통적 학생과 탈전통적 학생 간의 불평등과 <strong>'정보 사막'</strong> 현상을 규명하고, 학생의 웰빙을 보장하는 미래형 고교 교육 체제 구축을 위한 정책적 대안을 도출하는 데
+          목적이 있습니다.
         </p>
       </div>
 
+      <!-- 분석 틀 -->
       <div class="glass-card intro-card">
-        <h3 class="intro-card__heading">📋 조사 순서 안내</h3>
-        <p class="intro-card__text" style="margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.85rem;">
-          다음 순서에 따라 하루를 돌아보고 기록해 주세요.
+        <h3 class="intro-card__heading">📊 연구 분석 틀: Iloh & DRM 통합 모델</h3>
+        <p class="intro-card__text" style="margin-bottom:0.8rem;">
+          일로(Iloh)의 생태학적 진로 궤적 모델을 DRM의 정교한 시계열 데이터와 결합합니다.
+        </p>
+
+        <div class="intro-framework-table">
+          <div class="intro-framework-row intro-framework-row--header">
+            <div class="intro-framework-cell">분석 차원</div>
+            <div class="intro-framework-cell">DRM 측정 내용</div>
+            <div class="intro-framework-cell">웰빙 연계</div>
+          </div>
+          <div class="intro-framework-row">
+            <div class="intro-framework-cell intro-framework-cell--label">
+              <span class="intro-framework-icon">📡</span> 정보
+            </div>
+            <div class="intro-framework-cell">
+              진로 정보 접촉 빈도, 정보원(교사, 부모, SNS 등), 정보의 질적 신뢰도
+            </div>
+            <div class="intro-framework-cell">
+              정보 부족 → 불안감<br>정보 획득 → 자기효능감
+            </div>
+          </div>
+          <div class="intro-framework-row">
+            <div class="intro-framework-cell intro-framework-cell--label">
+              <span class="intro-framework-icon">⏳</span> 시간
+            </div>
+            <div class="intro-framework-cell">
+              학습·여가·진로 탐색 시간 배분, 압박감과 누적된 실패 경험
+            </div>
+            <div class="intro-framework-cell">
+              경쟁적 독촉 → 스트레스<br>몰입(Flow) → 성장
+            </div>
+          </div>
+          <div class="intro-framework-row">
+            <div class="intro-framework-cell intro-framework-cell--label">
+              <span class="intro-framework-icon">🚪</span> 기회
+            </div>
+            <div class="intro-framework-cell">
+              과목 선택, 전공 변경 시도, 지역 교육 인프라 활용 가능성
+            </div>
+            <div class="intro-framework-cell">
+              제도적 장벽 → 무력감<br>선택권 행사 → 자율성
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 조사 절차 안내 -->
+      <div class="glass-card intro-card">
+        <h3 class="intro-card__heading">📋 데이터 수집 절차 (3단계)</h3>
+        <p class="intro-card__text" style="margin-bottom:0.5rem; font-size:0.85rem;">
+          DRM은 학생이 어제의 일과를 에피소드 단위로 회상하며 기록하고, 각 에피소드에서의 심리 상태와 자원 접근성을 평가하는 방식입니다.
         </p>
 
         <div class="intro-step">
           <div class="intro-step__number">1</div>
           <div class="intro-step__content">
-            <div class="intro-step__title">기분 좋았던 활동 작성</div>
+            <div class="intro-step__title">일과 재구성 (Diary Reconstruction)</div>
             <p class="intro-step__desc">
-              어제 하루 동안 가장 <strong>기분이 좋았던 일</strong> 혹은 <strong>만족스러웠던 일(활동)</strong> 5가지를 작성해 주세요.<br>
-              <span class="intro-step__note">(최소 3가지 이상, 최대 5가지만 작성해 주세요)</span>
+              전날 아침부터 잠들기 전까지의 일과를 <strong>최소 10~15개의 에피소드</strong>로 분절합니다.
             </p>
             <div class="intro-examples">
               <span class="intro-examples__label">예시</span>
               <div class="intro-examples__items">
-                <span class="intro-example-tag">잠을 푹 잠</span>
-                <span class="intro-example-tag">반려동물과 산책함</span>
-                <span class="intro-example-tag">좋아하는 책을 읽음</span>
-                <span class="intro-example-tag">친구의 고민을 들어줌</span>
-                <span class="intro-example-tag">숙제를 계획한 시간에 끝마침</span>
-                <span class="intro-example-tag">수업시간에 칭찬받음</span>
-                <span class="intro-example-tag">어려운 수학문제를 해결함</span>
-                <span class="intro-example-tag">온라인 게임을 함</span>
+                <span class="intro-example-tag">등교 시간</span>
+                <span class="intro-example-tag">1교시 수학 수업</span>
+                <span class="intro-example-tag">점심시간</span>
+                <span class="intro-example-tag">방과 후 학원</span>
+                <span class="intro-example-tag">저녁 식사</span>
+                <span class="intro-example-tag">유튜브 시청</span>
+                <span class="intro-example-tag">자율학습</span>
               </div>
             </div>
           </div>
@@ -102,37 +153,27 @@
         <div class="intro-step">
           <div class="intro-step__number">2</div>
           <div class="intro-step__content">
-            <div class="intro-step__title">구체적인 활동 내용 기록</div>
+            <div class="intro-step__title">에피소드별 심층 진단 (Iloh 3차원 적용)</div>
             <p class="intro-step__desc">
-              기록한 일(활동)이 어떤 일이었는지 조금 더 자세히 작성해 주세요.<br>
-              어제 하루 중 <strong>언제</strong> 했던 일이고, <strong>어디서</strong> 했는지, <strong>누구와</strong> 했었는지 생각하여 적어 주세요.
+              기억에 남는 3~5개의 에피소드를 골라 아래 항목을 체크합니다.
             </p>
             <div class="intro-examples">
-              <span class="intro-examples__label">예시</span>
+              <span class="intro-examples__label">진단 항목</span>
               <div class="intro-examples__grid">
                 <div class="intro-example-group">
-                  <span class="intro-example-group__title">⏰ 언제</span>
-                  <span class="intro-example-tag">학교 수업 시간</span>
-                  <span class="intro-example-tag">점심시간</span>
-                  <span class="intro-example-tag">학원 쉬는 시간</span>
-                  <span class="intro-example-tag">학원 마치고 집에 가는 길</span>
-                  <span class="intro-example-tag">잠자기 전</span>
+                  <span class="intro-example-group__title">📡 정보 체크</span>
+                  <span class="intro-example-tag">진로 관련 유의미한 정보를 얻었는가?</span>
+                  <span class="intro-example-tag">공식적/비공식적 정보원 확인</span>
                 </div>
                 <div class="intro-example-group">
-                  <span class="intro-example-group__title">📍 어디서</span>
-                  <span class="intro-example-tag">학교에서</span>
-                  <span class="intro-example-tag">PC방에서</span>
-                  <span class="intro-example-tag">버스정거장에서</span>
-                  <span class="intro-example-tag">집에서</span>
-                  <span class="intro-example-tag">온라인 가상현실에서</span>
+                  <span class="intro-example-group__title">⏳ 시간 체크</span>
+                  <span class="intro-example-tag">시간 압박을 느꼈는가?</span>
+                  <span class="intro-example-tag">주도적으로 시간을 운용했는가?</span>
                 </div>
                 <div class="intro-example-group">
-                  <span class="intro-example-group__title">👥 누구와</span>
-                  <span class="intro-example-tag">혼자서</span>
-                  <span class="intro-example-tag">친구</span>
-                  <span class="intro-example-tag">담임선생님</span>
-                  <span class="intro-example-tag">동생</span>
-                  <span class="intro-example-tag">이웃사람들</span>
+                  <span class="intro-example-group__title">🚪 기회 체크</span>
+                  <span class="intro-example-tag">내가 원했던 다른 선택지가 있었는가?</span>
+                  <span class="intro-example-tag">제도적/환경적 제약이 있었는가?</span>
                 </div>
               </div>
             </div>
@@ -142,19 +183,19 @@
         <div class="intro-step">
           <div class="intro-step__number">3</div>
           <div class="intro-step__content">
-            <div class="intro-step__title">활동 동기 평가</div>
+            <div class="intro-step__title">정서 및 웰빙 측정</div>
             <p class="intro-step__desc">
-              그 일(활동)이 나에게 있어 왜 기분이 좋고, 만족스러웠는지 그 이유를 알려 주세요.<br>
-              각 이유가 얼마나 해당하는지 <strong>1점(전혀 아니다) ~ 6점(매우 그렇다)</strong> 사이로 점수를 선택해 주세요.
+              각 에피소드에서 느낀 <strong>긍정 정서</strong>(즐거움, 자신감)와 <strong>부정 정서</strong>(불안, 지루함)를 7점 척도로 기록합니다.
             </p>
           </div>
         </div>
       </div>
 
+      <!-- 개인정보 보호 -->
       <div class="glass-card intro-card intro-card--privacy">
         <h3 class="intro-card__heading">🔒 개인정보 보호 안내</h3>
         <p class="intro-card__text">
-          귀하께서 작성하신 기록은 <strong>철저하게 비밀이 보장</strong>되며, 무작위 번호를 부여하여 관리하므로 개인의 신원을 확인할 수 없습니다.
+          귀하께서 작성하신 기록은 <strong>철저하게 비밀이 보장</strong>되며, 무작위 번호를 부여하여 관리하므로 개인의 신원을 확인할 수 없습니다. 연구 목적 이외에는 사용되지 않습니다.
         </p>
       </div>
 
@@ -242,7 +283,7 @@
     <section class="part-section" id="part3">
       <h2 class="part-title">PART 3. 종합 진단 및 제언</h2>
       <p class="part-description">
-        어제 하루를 종합적으로 돌아보며 나의 일상에 대해 성찰합니다.
+        어제 하루를 종합적으로 돌아보며 나의 일상 속 <strong>정보·시간·기회</strong>에 대해 성찰합니다.
       </p>
 
       <!-- Summary Dashboard -->
@@ -261,12 +302,12 @@
         </div>
       </div>
 
-      <!-- Q1: Biggest Barrier -->
+      <!-- ═══ Q1: Biggest Barrier ═══ -->
       <div class="glass-card">
-        <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.8rem;">
-          어제의 가장 큰 장벽
+        <h3 class="part3-q-title">
+          Q1. 어제의 가장 큰 장벽
         </h3>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+        <p class="part3-q-desc">
           어제 하루 중 나의 성장을 가장 가로막았던 '결핍'은 무엇인가요?
         </p>
         <div class="barrier-options" id="barrierOptions">
@@ -297,15 +338,418 @@
         </div>
       </div>
 
-      <!-- Q2: Message to School -->
+      <!-- ═══ Q2: 정보 접근성 종합 평가 ═══ -->
       <div class="glass-card">
-        <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">
-          🏫 학교에 바라는 한 마디
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--info">📡 정보</span>
+          Q2. 진로 정보 접근성 종합 평가
         </h3>
-        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+        <p class="part3-q-desc">
+          다음 문항을 읽고 자신에게 해당하는 정도를 선택해 주세요.<br>
+          <span class="part3-scale-hint">(1점: 전혀 그렇지 않다 ← → 7점: 매우 그렇다)</span>
+        </p>
+        <div class="likert-group" id="likertInfoAccess">
+          <div class="likert-item">
+            <span class="likert-item__label">나는 진로(대학·직업)에 대한 정보를 쉽게 구할 수 있다</span>
+            <div class="likert-scale" data-name="infoAccess1">
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess1" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">학교에서 제공하는 진로 정보는 나에게 실질적으로 도움이 된다</span>
+            <div class="likert-scale" data-name="infoAccess2">
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess2" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">진로 정보가 부족해서 불안감을 느낀 적이 있다</span>
+            <div class="likert-scale" data-name="infoAccess3">
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="infoAccess3" value="7"><span>7</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q3: 정보원 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--info">📡 정보</span>
+          Q3. 주요 진로 정보원
+        </h3>
+        <p class="part3-q-desc">
+          나의 진로 결정에 가장 큰 영향을 미치는 <strong>정보원(정보를 주는 사람/매체)</strong>은 무엇인가요?<br>
+          해당하는 항목을 <strong>모두</strong> 선택해 주세요.
+        </p>
+        <div class="checkbox-grid" id="infoSourceCheck">
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="교과선생님"><span>교과선생님</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="담임선생님"><span>담임선생님</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="진로상담교사"><span>진로상담교사</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="부모님/보호자"><span>부모님/보호자</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="형제·자매"><span>형제·자매</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="친구·선후배"><span>친구·선후배</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource" value="학원 강사"><span>학원
+              강사</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource"
+              value="유튜브/SNS"><span>유튜브/SNS</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource" value="온라인 커뮤니티"><span>온라인 커뮤니티 (오르비,
+              수만휘 등)</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource" value="대학 입학처 홈페이지"><span>대학 입학처
+              홈페이지</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource" value="진로 정보 앱/사이트"><span>진로 정보 앱/사이트
+              (커리어넷 등)</span></label>
+          <label class="checkbox-option"><input type="checkbox" name="infoSource" value="기타"><span>기타</span></label>
+        </div>
+      </div>
+
+      <!-- ═══ Q4: 정보 사막 체감 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--info">📡 정보</span>
+          Q4. 정보 사막 체감
+        </h3>
+        <p class="part3-q-desc">
+          진로 정보를 찾으려고 했지만 구하기 어려웠던 경험이 있다면 구체적으로 적어 주세요.
+        </p>
+        <textarea class="form-textarea" id="infoDesertExperience"
+          placeholder="예시 답변: 관심 있는 전공이 있어서 검색해 봤지만, 학교에는 관련 수업이 없고 선생님도 잘 모르셨어요. 유튜브에서 본 정보는 광고 같아서 신뢰가 가지 않았습니다. 주변에 그 분야로 진학한 선배도 없어서 막막했습니다."
+          rows="4"></textarea>
+      </div>
+
+      <!-- ═══ Q5: 시간 활용도 종합 평가 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--time">⏳ 시간</span>
+          Q5. 시간 활용도 종합 평가
+        </h3>
+        <p class="part3-q-desc">
+          다음 문항을 읽고 자신에게 해당하는 정도를 선택해 주세요.<br>
+          <span class="part3-scale-hint">(1점: 전혀 그렇지 않다 ← → 7점: 매우 그렇다)</span>
+        </p>
+        <div class="likert-group" id="likertTimeUse">
+          <div class="likert-item">
+            <span class="likert-item__label">나는 하루 일과를 스스로 계획하고 주도적으로 운영하고 있다</span>
+            <div class="likert-scale" data-name="timeUse1">
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse1" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">입시/성적 경쟁 때문에 시간의 압박감을 자주 느낀다</span>
+            <div class="likert-scale" data-name="timeUse2">
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse2" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">의미 없이 흘려 보내는 시간(방치/대기)이 많다고 느낀다</span>
+            <div class="likert-scale" data-name="timeUse3">
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse3" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">어제 하루 중 무언가에 완전히 몰입(Flow)한 경험이 있다</span>
+            <div class="likert-scale" data-name="timeUse4">
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="timeUse4" value="7"><span>7</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q6: 시간 설계 제안 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--time">⏳ 시간</span>
+          Q6. 시간 설계 제안
+        </h3>
+        <p class="part3-q-desc">
+          만약 어제의 시간표를 내가 직접 다시 설계할 수 있다면, 어떤 시간을 바꾸고 싶은가요?
+        </p>
+        <textarea class="form-textarea" id="timeDesignSuggestion"
+          placeholder="예시 답변: 7교시 이후 강제 야자(자습) 시간을 없애고, 그 시간에 관심 있는 프로그래밍이나 미술 활동을 하고 싶어요. 점심시간도 40분은 너무 짧아서 1시간으로 늘렸으면 좋겠습니다."
+          rows="4"></textarea>
+      </div>
+
+      <!-- ═══ Q7: 기회 인식 종합 평가 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--opp">🚪 기회</span>
+          Q7. 기회 인식 종합 평가
+        </h3>
+        <p class="part3-q-desc">
+          다음 문항을 읽고 자신에게 해당하는 정도를 선택해 주세요.<br>
+          <span class="part3-scale-hint">(1점: 전혀 그렇지 않다 ← → 7점: 매우 그렇다)</span>
+        </p>
+        <div class="likert-group" id="likertOppAccess">
+          <div class="likert-item">
+            <span class="likert-item__label">우리 학교에서는 내가 원하는 과목/수업을 자유롭게 선택할 수 있다</span>
+            <div class="likert-scale" data-name="oppAccess1">
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess1" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">진로 변경(전공 변경 등)을 원할 때, 학교가 이를 유연하게 지원해 준다</span>
+            <div class="likert-scale" data-name="oppAccess2">
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess2" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">우리 지역(학교 주변)에는 진로 탐색을 위한 교육 인프라(체험센터, 멘토 등)가 충분하다</span>
+            <div class="likert-scale" data-name="oppAccess3">
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess3" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">성적이 아닌 나의 관심·적성 중심으로 진로를 결정할 수 있다고 느낀다</span>
+            <div class="likert-scale" data-name="oppAccess4">
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="oppAccess4" value="7"><span>7</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q8: 기회 구조 개선 제안 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--opp">🚪 기회</span>
+          Q8. 기회 구조 개선 제안
+        </h3>
+        <p class="part3-q-desc">
+          학교에서 나에게 새로운 기회(과목·활동·경험)를 준다면, 가장 하고 싶은 것은 무엇인가요?
+        </p>
+        <textarea class="form-textarea" id="oppImproveSuggestion"
+          placeholder="예시 답변: 고교학점제로 과목 선택이 가능하다고 하지만, 실제로 우리 학교에서는 인기 없는 과목은 개설이 안 돼요. AI·코딩 수업을 듣고 싶은데 선생님이 없어서 못 듣고 있습니다. 근처 대학에서 수업을 들을 수 있다면 좋겠습니다."
+          rows="4"></textarea>
+      </div>
+
+      <!-- ═══ Q9: 전반적 웰빙 자가 진단 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--well">💚 웰빙</span>
+          Q9. 전반적 웰빙 자가 진단
+        </h3>
+        <p class="part3-q-desc">
+          어제 <strong>하루 전체</strong>를 떠올렸을 때, 다음 감정을 얼마나 느꼈나요?<br>
+          <span class="part3-scale-hint">(1점: 전혀 아님 ← → 7점: 매우 그렇다)</span>
+        </p>
+        <div class="likert-group" id="likertWellbeing">
+          <div class="likert-item">
+            <span class="likert-item__label">😊 즐거움/행복감</span>
+            <div class="likert-scale" data-name="wb_happy">
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_happy" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">💪 자신감/자기효능감</span>
+            <div class="likert-scale" data-name="wb_confident">
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_confident" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">🌱 성장하고 있다는 느낌</span>
+            <div class="likert-scale" data-name="wb_growth">
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_growth" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">😰 불안감/초조함</span>
+            <div class="likert-scale" data-name="wb_anxious">
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_anxious" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">😴 지루함/무기력함</span>
+            <div class="likert-scale" data-name="wb_bored">
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_bored" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">😞 우울함/슬픔</span>
+            <div class="likert-scale" data-name="wb_depressed">
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_depressed" value="7"><span>7</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q10: 정책 제언 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--policy">🏛️ 정책</span>
+          Q10. 미래 교육에 대한 제언
+        </h3>
+        <p class="part3-q-desc">
+          다음 세 가지 정책 방향 중 <strong>가장 시급하다고 생각하는 순서</strong>대로 번호(1, 2, 3)를 매겨 주세요.
+        </p>
+        <div class="policy-ranking" id="policyRanking">
+          <div class="policy-item">
+            <select class="policy-rank-select" id="policyRank1">
+              <option value="">순위</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <div class="policy-item__content">
+              <div class="policy-item__title">📡 정보의 민주화</div>
+              <div class="policy-item__desc">디지털 진로 정보 큐레이션 및 지역 연계 멘토링 강화</div>
+            </div>
+          </div>
+          <div class="policy-item">
+            <select class="policy-rank-select" id="policyRank2">
+              <option value="">순위</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <div class="policy-item__content">
+              <div class="policy-item__title">⏳ 유연한 시간 설계</div>
+              <div class="policy-item__desc">보충 및 도약의 시간 공식화, 전공 변경 골든타임 확보</div>
+            </div>
+          </div>
+          <div class="policy-item">
+            <select class="policy-rank-select" id="policyRank3">
+              <option value="">순위</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <div class="policy-item__content">
+              <div class="policy-item__title">🚪 기회 구조의 재설계</div>
+              <div class="policy-item__desc">관심도 중심 진로 선택제 도입, 대학 연계 개방형 학습경로 확대</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q11: 학교에 바라는 한 마디 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          🏫 Q11. 학교에 바라는 한 마디
+        </h3>
+        <p class="part3-q-desc">
           "내가 만약 학교를 직접 설계할 수 있다면, 나의 일상을 위해 <strong>[이것]</strong>만은 꼭 바꾸고 싶다!"
         </p>
-        <textarea class="form-textarea" id="schoolMessage" placeholder="자유롭게 적어 주세요..." rows="4"></textarea>
+        <textarea class="form-textarea" id="schoolMessage"
+          placeholder="예시 답변: 모든 학생이 똑같은 시간표로 공부하는 게 아니라, 각자 관심 있는 분야를 자유롭게 탐색할 수 있는 '나만의 탐구 시간'이 매일 1시간씩 있으면 좋겠습니다. 그리고 학교 밖의 전문가나 대학생 멘토와 정기적으로 만날 수 있는 기회가 있었으면 합니다."
+          rows="4"></textarea>
+      </div>
+
+      <!-- ═══ Q12: 어제 vs 이상적 하루 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          ✨ Q12. 나의 이상적인 하루
+        </h3>
+        <p class="part3-q-desc">
+          어제의 실제 하루와 비교했을 때, <strong>나에게 이상적인 하루</strong>는 어떤 모습인가요? 자유롭게 그려 주세요.
+        </p>
+        <textarea class="form-textarea" id="idealDay"
+          placeholder="예시 답변: 아침에 여유롭게 일어나서 좋아하는 음악을 들으며 등교하고, 오전에는 흥미 있는 수업(예: 심리학, 디자인)을 듣고, 점심에는 친구들과 느긋하게 이야기하고, 오후에는 동아리 프로젝트를 하고, 저녁에는 운동을 한 뒤 독서하며 하루를 마무리하고 싶어요."
+          rows="4"></textarea>
       </div>
 
       <!-- Navigation & Export -->

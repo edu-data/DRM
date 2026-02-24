@@ -489,6 +489,16 @@
 
     // ──────────────── Export ────────────────
     function collectAllData() {
+        // Helper: collect all radio values with a given name prefix
+        function getLikertValue(name) {
+            const el = document.querySelector(`input[name="${name}"]:checked`);
+            return el ? parseInt(el.value) : null;
+        }
+
+        // Collect info sources (checkboxes)
+        const infoSources = [...document.querySelectorAll('input[name="infoSource"]:checked')]
+            .map(cb => cb.value);
+
         return {
             timestamp: new Date().toISOString(),
             episodes: state.episodes.map((ep) => ({
@@ -517,8 +527,45 @@
                 };
             }),
             globalReflection: {
+                // Q1
                 biggestBarrier: state.barrier,
-                schoolMessage: $('#schoolMessage').value,
+                // Q2: 정보 접근성 (Likert)
+                infoAccess1: getLikertValue('infoAccess1'),
+                infoAccess2: getLikertValue('infoAccess2'),
+                infoAccess3: getLikertValue('infoAccess3'),
+                // Q3: 정보원 (checkboxes)
+                infoSources: infoSources,
+                // Q4: 정보 사막 (open-ended)
+                infoDesertExperience: $('#infoDesertExperience')?.value || '',
+                // Q5: 시간 활용도 (Likert)
+                timeUse1: getLikertValue('timeUse1'),
+                timeUse2: getLikertValue('timeUse2'),
+                timeUse3: getLikertValue('timeUse3'),
+                timeUse4: getLikertValue('timeUse4'),
+                // Q6: 시간 설계 제안 (open-ended)
+                timeDesignSuggestion: $('#timeDesignSuggestion')?.value || '',
+                // Q7: 기회 인식 (Likert)
+                oppAccess1: getLikertValue('oppAccess1'),
+                oppAccess2: getLikertValue('oppAccess2'),
+                oppAccess3: getLikertValue('oppAccess3'),
+                oppAccess4: getLikertValue('oppAccess4'),
+                // Q8: 기회 구조 개선 (open-ended)
+                oppImproveSuggestion: $('#oppImproveSuggestion')?.value || '',
+                // Q9: 웰빙 자가 진단 (Likert)
+                wb_happy: getLikertValue('wb_happy'),
+                wb_confident: getLikertValue('wb_confident'),
+                wb_growth: getLikertValue('wb_growth'),
+                wb_anxious: getLikertValue('wb_anxious'),
+                wb_bored: getLikertValue('wb_bored'),
+                wb_depressed: getLikertValue('wb_depressed'),
+                // Q10: 정책 제언 (ranking)
+                policyRank_infoDemocracy: $('#policyRank1')?.value || '',
+                policyRank_flexibleTime: $('#policyRank2')?.value || '',
+                policyRank_oppRedesign: $('#policyRank3')?.value || '',
+                // Q11: 학교에 바라는 한 마디 (open-ended)
+                schoolMessage: $('#schoolMessage')?.value || '',
+                // Q12: 이상적인 하루 (open-ended)
+                idealDay: $('#idealDay')?.value || '',
             },
         };
     }
