@@ -17,15 +17,15 @@
     <!-- ===== HEADER ===== -->
     <header class="app-header">
       <span class="app-header__badge">Research Survey 2026</span>
-      <h1 class="app-header__title">일상재구성법(DRM) 설문</h1>
+      <h1 class="app-header__title">『나의 하루 돌아보기』</h1>
       <p class="app-header__subtitle">
-        어제의 일과를 에피소드 단위로 되돌아보며, 나의 일상 속 <strong>정보</strong>·<strong>시간</strong>·<strong>기회</strong>를 진단합니다.
+        일상재구성법(DRM)을 활용한 설문조사
       </p>
     </header>
 
     <!-- ===== PROGRESS BAR ===== -->
     <nav class="progress-bar" id="progressBar">
-      <div class="progress-step active" data-step="1">
+      <div class="progress-step" data-step="1">
         <div class="progress-step__circle">1
           <span class="progress-step__label">일과 재구성</span>
         </div>
@@ -49,9 +49,127 @@
     </nav>
 
     <!-- ============================================================
+       INTRO: 설문 안내문
+       ============================================================ -->
+    <section class="part-section active" id="partIntro">
+
+      <div class="intro-hero">
+        <div class="intro-hero__icon">📖</div>
+        <h2 class="intro-hero__title">『나의 하루 돌아보기』 조사지</h2>
+        <p class="intro-hero__subtitle">일상재구성법(DRM) 기반 설문</p>
+      </div>
+
+      <div class="glass-card intro-card">
+        <h3 class="intro-card__heading">👋 안녕하세요</h3>
+        <p class="intro-card__text">
+          『나의 하루 돌아보기』는 <strong>어제 하루</strong> 동안 있었던 일과 그 일을 하면서 느꼈던 기분에 대한 것입니다.
+        </p>
+        <p class="intro-card__text">
+          여러분들이 학교를 포함한 <strong>가정, 학원, 취미 및 휴식시간</strong> 등 일상생활에서 했던 모든 일(활동)을 포함하여 작성하면 됩니다.
+        </p>
+      </div>
+
+      <div class="glass-card intro-card">
+        <h3 class="intro-card__heading">📋 조사 순서 안내</h3>
+        <p class="intro-card__text" style="margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.85rem;">
+          다음 순서에 따라 하루를 돌아보고 기록해 주세요.
+        </p>
+
+        <div class="intro-step">
+          <div class="intro-step__number">1</div>
+          <div class="intro-step__content">
+            <div class="intro-step__title">기분 좋았던 활동 작성</div>
+            <p class="intro-step__desc">
+              어제 하루 동안 가장 <strong>기분이 좋았던 일</strong> 혹은 <strong>만족스러웠던 일(활동)</strong> 5가지를 작성해 주세요.<br>
+              <span class="intro-step__note">(최소 3가지 이상, 최대 5가지만 작성해 주세요)</span>
+            </p>
+            <div class="intro-examples">
+              <span class="intro-examples__label">예시</span>
+              <div class="intro-examples__items">
+                <span class="intro-example-tag">잠을 푹 잠</span>
+                <span class="intro-example-tag">반려동물과 산책함</span>
+                <span class="intro-example-tag">좋아하는 책을 읽음</span>
+                <span class="intro-example-tag">친구의 고민을 들어줌</span>
+                <span class="intro-example-tag">숙제를 계획한 시간에 끝마침</span>
+                <span class="intro-example-tag">수업시간에 칭찬받음</span>
+                <span class="intro-example-tag">어려운 수학문제를 해결함</span>
+                <span class="intro-example-tag">온라인 게임을 함</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-step">
+          <div class="intro-step__number">2</div>
+          <div class="intro-step__content">
+            <div class="intro-step__title">구체적인 활동 내용 기록</div>
+            <p class="intro-step__desc">
+              기록한 일(활동)이 어떤 일이었는지 조금 더 자세히 작성해 주세요.<br>
+              어제 하루 중 <strong>언제</strong> 했던 일이고, <strong>어디서</strong> 했는지, <strong>누구와</strong> 했었는지 생각하여 적어 주세요.
+            </p>
+            <div class="intro-examples">
+              <span class="intro-examples__label">예시</span>
+              <div class="intro-examples__grid">
+                <div class="intro-example-group">
+                  <span class="intro-example-group__title">⏰ 언제</span>
+                  <span class="intro-example-tag">학교 수업 시간</span>
+                  <span class="intro-example-tag">점심시간</span>
+                  <span class="intro-example-tag">학원 쉬는 시간</span>
+                  <span class="intro-example-tag">학원 마치고 집에 가는 길</span>
+                  <span class="intro-example-tag">잠자기 전</span>
+                </div>
+                <div class="intro-example-group">
+                  <span class="intro-example-group__title">📍 어디서</span>
+                  <span class="intro-example-tag">학교에서</span>
+                  <span class="intro-example-tag">PC방에서</span>
+                  <span class="intro-example-tag">버스정거장에서</span>
+                  <span class="intro-example-tag">집에서</span>
+                  <span class="intro-example-tag">온라인 가상현실에서</span>
+                </div>
+                <div class="intro-example-group">
+                  <span class="intro-example-group__title">👥 누구와</span>
+                  <span class="intro-example-tag">혼자서</span>
+                  <span class="intro-example-tag">친구</span>
+                  <span class="intro-example-tag">담임선생님</span>
+                  <span class="intro-example-tag">동생</span>
+                  <span class="intro-example-tag">이웃사람들</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-step">
+          <div class="intro-step__number">3</div>
+          <div class="intro-step__content">
+            <div class="intro-step__title">활동 동기 평가</div>
+            <p class="intro-step__desc">
+              그 일(활동)이 나에게 있어 왜 기분이 좋고, 만족스러웠는지 그 이유를 알려 주세요.<br>
+              각 이유가 얼마나 해당하는지 <strong>1점(전혀 아니다) ~ 6점(매우 그렇다)</strong> 사이로 점수를 선택해 주세요.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card intro-card intro-card--privacy">
+        <h3 class="intro-card__heading">🔒 개인정보 보호 안내</h3>
+        <p class="intro-card__text">
+          귀하께서 작성하신 기록은 <strong>철저하게 비밀이 보장</strong>되며, 무작위 번호를 부여하여 관리하므로 개인의 신원을 확인할 수 없습니다.
+        </p>
+      </div>
+
+      <div class="nav-buttons" style="justify-content:center;">
+        <button class="btn btn-primary btn-start-survey" id="startSurveyBtn" type="button">
+          📝 설문 시작하기
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
        PART 1: 일과 재구성 (Diary Construction)
        ============================================================ -->
-    <section class="part-section active" id="part1">
+    <section class="part-section" id="part1">
       <h2 class="part-title">PART 1. 어제의 일과 재구성</h2>
       <p class="part-description">
         어제 하루를 기억나는 대로 <strong>10~15개의 에피소드</strong>로 나누어 주세요.<br />

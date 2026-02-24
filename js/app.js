@@ -13,7 +13,7 @@
         diagnoses: {},
         barrier: null,
         schoolMessage: '',
-        currentPart: 1,
+        currentPart: 'intro',
     };
 
     let episodeIdCounter = 0;
@@ -59,11 +59,18 @@
         state.currentPart = n;
         $$('.part-section').forEach((s) => s.classList.remove('active'));
 
-        if (n === 'done') {
+        const progressBar = $('#progressBar');
+
+        if (n === 'intro') {
+            $('#partIntro').classList.add('active');
+            progressBar.style.display = 'none';
+        } else if (n === 'done') {
             $('#completionScreen').classList.add('active');
+            progressBar.style.display = 'flex';
             updateProgressSteps(4);
         } else {
             $(`#part${n}`).classList.add('active');
+            progressBar.style.display = 'flex';
             updateProgressSteps(n);
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -739,7 +746,19 @@
             createEpisode({ startTime: '19:00', endTime: '23:00', activity: '자기주도학습 / 자유시간', location: '집 / 독서실', companion: '혼자' });
         }
 
+        // Hide progress bar on intro screen (default view)
+        if (state.currentPart === 'intro') {
+            $('#progressBar').style.display = 'none';
+        }
+
         // ---- Button handlers ----
+
+        // Intro → Part 1
+        const startSurveyBtn = $('#startSurveyBtn');
+        if (startSurveyBtn) {
+            startSurveyBtn.addEventListener('click', () => goToPart(1));
+        }
+
         addEpisodeBtn.addEventListener('click', () => {
             const last = state.episodes[state.episodes.length - 1];
             createEpisode({ startTime: last?.endTime || '', endTime: '', activity: '', location: '', companion: '' });
