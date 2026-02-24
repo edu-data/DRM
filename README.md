@@ -6,6 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](index.html)
 [![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)](#)
+[![Google Apps Script](https://img.shields.io/badge/Backend-Google%20Apps%20Script-4285F4?logo=google&logoColor=white)](#)
+[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-222?logo=github&logoColor=white)](https://edu-data.github.io/DRM/)
 
 ---
 
@@ -29,9 +31,10 @@
 
 ## 🖥️ 설문 도구 소개
 
-서버 없이 **브라우저만으로 동작**하는 SPA(Single Page Application) 설문입니다.
+서버 없이 **브라우저만으로 동작**하는 SPA(Single Page Application) 설문입니다.  
+응답 데이터는 **Google Apps Script**를 통해 **Google Sheets**에 자동 수집됩니다.
 
-### 설문 구조 (3-Part)
+### 설문 구조 (3-Part, 12개 종합 진단 문항)
 
 ```
 PART 1. 어제의 일과 재구성 (Diary Construction)
@@ -43,24 +46,42 @@ PART 2. 에피소드별 심층 진단 (Iloh & Well-being)
    ├─ 🚪 기회: 선택 주체성 + 제도적 유연성
    └─ 💜 웰빙: 즐거움·자신감·불안함·지루함 (7점 척도)
 
-PART 3. 종합 진단 및 제언 (Global Reflection)
-   ├─ 가장 큰 장벽 (정보/시간/기회)
-   └─ 학교에 바라는 한 마디
+PART 3. 종합 진단 및 제언 (Global Reflection) — 12문항
+   ├─ Q1. 가장 큰 장벽 (정보/시간/기회)
+   ├─ Q2. 정보 접근성 (Likert 7점 × 3문항)
+   ├─ Q3. 정보 획득 채널 (다중선택 체크박스)
+   ├─ Q4. 정보 사막 체감 경험 (개방형)
+   ├─ Q5. 시간 활용도 (Likert 7점 × 4문항)
+   ├─ Q6. 시간 설계 자유 제안 (개방형)
+   ├─ Q7. 기회 접근성 (Likert 7점 × 4문항)
+   ├─ Q8. 기회 구조 개선 제안 (개방형)
+   ├─ Q9. 전반적 웰빙 (Likert 7점 × 6문항)
+   ├─ Q10. 정책 우선순위 순위 매기기
+   ├─ Q11. 학교에 바라는 한 마디 (개방형)
+   └─ Q12. 이상적인 하루 서술 (개방형)
 ```
 
 ### 주요 기능
 
-- 🎨 **프리미엄 다크 글래스모피즘 UI** — 보라-청록 그라데이션 테마
-- 📱 **반응형 디자인** — 모바일·태블릿·PC 모두 지원
-- 🎚️ **7점 척도 슬라이더** — 웰빙 감정 측정
-- 💾 **자동 중간 저장** — localStorage 기반 이탈 복원
-- 📊 **데이터 내보내기** — JSON / CSV 형식 다운로드
+| 기능 | 설명 |
+|------|------|
+| 🎨 프리미엄 UI | 다크 글래스모피즘 · 보라-청록 그라데이션 테마 |
+| 📱 반응형 디자인 | 모바일 · 태블릿 · PC 모두 지원 |
+| 🎚️ 7점 척도 슬라이더 | 웰빙 감정 및 Likert 측정 |
+| 💾 자동 중간 저장 | localStorage 기반 이탈 복원 |
+| ☁️ Google Sheets 수집 | Google Apps Script 자동 저장 (32개 컬럼) |
+| 🔒 관리자 대시보드 | 비밀번호 보호, 응답 조회 · CSV/JSON 다운로드 |
+| 📊 데이터 내보내기 | JSON / CSV 형식 로컬 다운로드 (백업) |
 
 ---
 
 ## 🚀 사용 방법
 
-### 즉시 실행
+### 즉시 실행 (GitHub Pages)
+
+🔗 **<https://edu-data.github.io/DRM/>**
+
+### 로컬 실행
 
 ```bash
 # 별도 설치 없이 index.html을 브라우저에서 열기
@@ -69,7 +90,60 @@ open index.html         # macOS
 xdg-open index.html     # Linux
 ```
 
-### 기본 에피소드 템플릿 (경기도 고등학교 기준)
+### 관리자 페이지
+
+```
+admin.html → 비밀번호 입력 → 전체 응답 조회 · CSV/JSON 다운로드
+```
+
+---
+
+## ☁️ 백엔드 아키텍처
+
+```mermaid
+flowchart LR
+  A[학생 설문<br/>index.html] -->|POST 응답 데이터| B[Google Apps Script<br/>서버리스 백엔드]
+  B -->|저장| C[(Google Sheets<br/>데이터베이스)]
+  D[관리자 페이지<br/>admin.html] -->|GET + 비밀번호| B
+  B -->|응답 목록| D
+```
+
+- **학생**: 설문 완료 시 → 자동으로 Google Sheets에 저장 (3개 시트)
+- **관리자**: `admin.html` 접속 → 비밀번호 입력 → 전체 응답 조회/다운로드
+- **비용**: 무료 (Google Apps Script 무료 티어)
+
+### Google Sheets 데이터 구조
+
+| 시트 | 내용 | 컬럼 수 |
+|------|------|---------|
+| **Responses** | 종합 응답 (Likert + 개방형 + 정책 순위) | 32 (A~AF) |
+| **Episodes** | 에피소드별 상세 기록 (시간, 활동, 장소, 동행인) | 7 |
+| **Diagnoses** | 심층 진단 기록 (정보·시간·기회·웰빙 슬라이더) | 12 |
+
+---
+
+## 📁 프로젝트 구조
+
+```
+DRM/
+├── index.html          # SPA 엔트리포인트 (설문 전체)
+├── admin.html          # 관리자 대시보드 (비밀번호 보호)
+├── css/
+│   ├── style.css       # 다크 글래스모피즘 디자인 시스템
+│   └── admin.css       # 관리자 페이지 스타일
+├── js/
+│   ├── app.js          # 설문 애플리케이션 로직
+│   ├── admin.js        # 관리자 데이터 조회/다운로드
+│   └── config.js       # GAS 엔드포인트 및 설정
+├── gas/
+│   └── Code.gs         # Google Apps Script 백엔드 (배포용)
+├── LICENSE
+└── README.md
+```
+
+---
+
+## 📊 기본 에피소드 템플릿 (경기도 고등학교 기준)
 
 | # | 시간 | 활동 |
 |---|------|------|
@@ -90,20 +164,6 @@ xdg-open index.html     # Linux
 
 ---
 
-## 📁 프로젝트 구조
-
-```
-DRM/
-├── index.html          # SPA 엔트리포인트
-├── css/
-│   └── style.css       # 다크 글래스모피즘 디자인 시스템
-├── js/
-│   └── app.js          # 애플리케이션 로직
-└── README.md
-```
-
----
-
 ## 🔬 연구 대상 및 표집
 
 | 집단 | 특성 |
@@ -120,12 +180,14 @@ DRM/
 flowchart LR
   A[Step 1<br/>일과 재구성] --> B[Step 2<br/>Iloh 3차원 진단]
   B --> C[Step 3<br/>정서 및 웰빙 측정]
-  C --> D[데이터 Export<br/>JSON / CSV]
+  C --> D[Step 4<br/>종합 제언 12문항]
+  D --> E[자동 저장<br/>Google Sheets]
 ```
 
 1. **Step 1 — 일과 재구성:** 전날 일과를 10~15개 에피소드로 분절
 2. **Step 2 — Iloh 3차원 적용:** 각 에피소드에 정보·시간·기회 진단
 3. **Step 3 — 웰빙 측정:** 긍정/부정 정서 7점 척도 기록
+4. **Step 4 — 종합 제언:** 12개 문항으로 정보·시간·기회·웰빙·정책 종합 평가
 
 ---
 
@@ -147,8 +209,11 @@ flowchart LR
 | 스타일 | Vanilla CSS (글래스모피즘, CSS 변수) |
 | 로직 | Vanilla JavaScript (ES6+) |
 | 폰트 | Noto Sans KR (Google Fonts) |
-| 저장 | localStorage API |
+| 백엔드 | Google Apps Script (서버리스) |
+| 데이터베이스 | Google Sheets (3개 시트) |
+| 로컬 저장 | localStorage API |
 | 내보내기 | Blob API (JSON/CSV) |
+| 배포 | GitHub Pages |
 
 ---
 
