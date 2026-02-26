@@ -794,9 +794,8 @@
     function init() {
         const loaded = loadState();
 
-        // 경기도 고등학교 일과 기본 템플릿 (12개 에피소드)
+        // 경기도 고등학교 일과 기본 템플릿 (10개 에피소드)
         if (!loaded) {
-            createEpisode({ startTime: '07:30', endTime: '08:20', activity: '기상 및 등교', location: '집 → 통학버스/도보', companion: '가족, 혼자' });
             createEpisode({ startTime: '08:20', endTime: '08:50', activity: '등교 및 조례', location: '학교 교실', companion: '담임선생님, 반 친구들' });
             createEpisode({ startTime: '09:00', endTime: '09:50', activity: '1교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
             createEpisode({ startTime: '10:00', endTime: '10:50', activity: '2교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
@@ -807,7 +806,6 @@
             createEpisode({ startTime: '15:30', endTime: '16:30', activity: '7교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
             createEpisode({ startTime: '16:30', endTime: '18:00', activity: '방과 후 활동 / 자율학습', location: '학교 / 학원', companion: '친구들, 선생님' });
             createEpisode({ startTime: '18:00', endTime: '19:00', activity: '귀가 및 저녁식사', location: '집', companion: '가족' });
-            createEpisode({ startTime: '19:00', endTime: '23:00', activity: '자기주도학습 / 자유시간', location: '집 / 독서실', companion: '혼자' });
         }
 
         // Hide progress bar on intro screen (default view)
