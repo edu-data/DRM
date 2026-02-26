@@ -21,16 +21,15 @@ function doPost(e) {
     const episodes = data.episodes || [];
     const diagnoses = data.diagnoses || [];
     const barrier = data.globalReflection ? data.globalReflection.biggestBarrier || '' : '';
-    const schoolMsg = data.globalReflection ? data.globalReflection.schoolMessage || '' : '';
 
     // 1) Responses 시트 — 종합 정보
     const respSheet = getOrCreateSheet(ss, 'Responses', [
-      '응답시각', '응답자ID', '에피소드수', '진단수', '가장큰장벽', '학교에바라는말'
+      '응답시각', '응답자ID', '에피소드수', '진단수', '가장큰장벽'
     ]);
     respSheet.appendRow([
       timestamp, respondentId,
       episodes.length, diagnoses.length,
-      barrier, schoolMsg
+      barrier
     ]);
 
     // 2) Episodes 시트 — 에피소드 상세
@@ -47,13 +46,15 @@ function doPost(e) {
 
     // 3) Diagnoses 시트 — 진단 상세
     const diagSheet = getOrCreateSheet(ss, 'Diagnoses', [
-      '응답자ID', '에피소드ID', '활동', '정보', '정보원', '시간지각',
+      '응답자ID', '에피소드ID', '활동', '정보', '정보원', '정보원_기타', '시간지각',
       '기회_선택', '기회_유연', '즐거움', '자신감', '불안함', '지루함'
     ]);
     diagnoses.forEach(function(d) {
+      var infoSources = Array.isArray(d.informationSources) ? d.informationSources.join(', ') : (d.informationSource || '');
+      var infoSourceEtc = d.informationSourceEtc || '';
       diagSheet.appendRow([
         respondentId, d.episodeId || '',
-        d.activity || '', d.information || '', d.informationSource || '',
+        d.activity || '', d.information || '', infoSources, infoSourceEtc,
         d.time || '', d.opportunityChosen || '', d.opportunityFlexible || '',
         d.wellbeing_joy != null ? d.wellbeing_joy : '',
         d.wellbeing_confidence != null ? d.wellbeing_confidence : '',
@@ -88,7 +89,7 @@ function doGet(e) {
     if (!respSheet || respSheet.getLastRow() <= 1) {
       return createJsonResponse({ success: true, data: [], count: 0 });
     }
-    var respData = respSheet.getRange(2, 1, respSheet.getLastRow() - 1, 6).getValues();
+    var respData = respSheet.getRange(2, 1, respSheet.getLastRow() - 1, 5).getValues();
 
     // 2) Episodes 읽기 → respondentId별 그룹
     var episodesMap = {};
@@ -109,16 +110,16 @@ function doGet(e) {
     var diagMap = {};
     var diagSheet = ss.getSheetByName('Diagnoses');
     if (diagSheet && diagSheet.getLastRow() > 1) {
-      var dRows = diagSheet.getRange(2, 1, diagSheet.getLastRow() - 1, 12).getValues();
+      var dRows = diagSheet.getRange(2, 1, diagSheet.getLastRow() - 1, 13).getValues();
       dRows.forEach(function(row) {
         var rid = row[0];
         if (!diagMap[rid]) diagMap[rid] = [];
         diagMap[rid].push({
           episodeId: row[1], activity: row[2],
-          information: row[3], informationSource: row[4], time: row[5],
-          opportunityChosen: row[6], opportunityFlexible: row[7],
-          wellbeing_joy: row[8], wellbeing_confidence: row[9],
-          wellbeing_anxiety: row[10], wellbeing_boredom: row[11]
+          information: row[3], informationSources: row[4], informationSourceEtc: row[5], time: row[6],
+          opportunityChosen: row[7], opportunityFlexible: row[8],
+          wellbeing_joy: row[9], wellbeing_confidence: row[10],
+          wellbeing_anxiety: row[11], wellbeing_boredom: row[12]
         });
       });
     }
@@ -131,8 +132,7 @@ function doGet(e) {
         respondentId: rid,
         episodes: episodesMap[rid] || [],
         diagnoses: diagMap[rid] || [],
-        barrier: row[4],
-        schoolMessage: row[5]
+        barrier: row[4]
       };
     });
 

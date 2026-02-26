@@ -12,7 +12,6 @@
         selectedEpisodeIds: [],
         diagnoses: {},
         barrier: null,
-        schoolMessage: '',
         currentPart: 'intro',
     };
 
@@ -265,7 +264,8 @@
 
             state.diagnoses[id] = {
                 information: null,
-                informationSource: '',
+                informationSources: [],
+                informationSourceEtc: '',
                 time: null,
                 opportunityChosen: null,
                 opportunityFlexible: null,
@@ -312,9 +312,17 @@
           </label>
         </div>
         <div class="form-group" style="margin-bottom:1rem;">
-          <label class="form-label">그 정보는 누구(무엇)를 통해 얻었나요?</label>
-          <input type="text" class="form-input info-source" data-ep="${id}"
-            placeholder="예: 선생님, SNS, 친구, 부모님 등" />
+          <label class="form-label">그 정보는 누구(무엇)을 통해 얻었나요? (중복응답 가능)</label>
+          <div class="checkbox-grid info-source-grid" data-ep="${id}">
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="친구"><span>친구</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="선생님"><span>선생님</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="부모님"><span>부모님</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="SNS"><span>SNS</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="AI"><span>AI</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="${uid}_infoSrc" value="기타"><span>기타</span></label>
+          </div>
+          <input type="text" class="form-input info-source-etc" data-ep="${id}"
+            placeholder="기타를 선택한 경우, 구체적으로 적어 주세요" style="margin-top:0.5rem; display:none;" />
         </div>
 
         <!-- 2. Time -->
@@ -427,11 +435,30 @@
                 });
             });
 
-            // Bind info source
-            card.querySelector('.info-source').addEventListener('input', (e) => {
-                if (state.diagnoses[id]) state.diagnoses[id].informationSource = e.target.value;
-                saveState();
-            });
+            // Bind info source checkboxes
+            const infoSrcGrid = card.querySelector('.info-source-grid');
+            const infoSrcEtcInput = card.querySelector('.info-source-etc');
+            if (infoSrcGrid) {
+                infoSrcGrid.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+                    cb.addEventListener('change', () => {
+                        if (state.diagnoses[id]) {
+                            const checked = [...infoSrcGrid.querySelectorAll('input[type="checkbox"]:checked')].map(c => c.value);
+                            state.diagnoses[id].informationSources = checked;
+                            // Show/hide '기타' text input
+                            if (infoSrcEtcInput) {
+                                infoSrcEtcInput.style.display = checked.includes('기타') ? 'block' : 'none';
+                            }
+                        }
+                        saveState();
+                    });
+                });
+            }
+            if (infoSrcEtcInput) {
+                infoSrcEtcInput.addEventListener('input', (e) => {
+                    if (state.diagnoses[id]) state.diagnoses[id].informationSourceEtc = e.target.value;
+                    saveState();
+                });
+            }
 
             diagnosisForms.appendChild(card);
         });
@@ -517,7 +544,8 @@
                     episodeId: parseInt(epId),
                     activity: ep?.activity || '',
                     information: d.information,
-                    informationSource: d.informationSource,
+                    informationSources: d.informationSources || [],
+                    informationSourceEtc: d.informationSourceEtc || '',
                     time: d.time,
                     opportunityChosen: d.opportunityChosen,
                     opportunityFlexible: d.opportunityFlexible,
@@ -559,13 +587,7 @@
                 wb_anxious: getLikertValue('wb_anxious'),
                 wb_bored: getLikertValue('wb_bored'),
                 wb_depressed: getLikertValue('wb_depressed'),
-                // Q10: 정책 제언 (ranking)
-                policyRank_infoDemocracy: $('#policyRank1')?.value || '',
-                policyRank_flexibleTime: $('#policyRank2')?.value || '',
-                policyRank_oppRedesign: $('#policyRank3')?.value || '',
-                // Q11: 학교에 바라는 한 마디 (open-ended)
-                schoolMessage: $('#schoolMessage')?.value || '',
-                // Q12: 이상적인 하루 (open-ended)
+                // Q10: 이상적인 하루 (open-ended)
                 idealDay: $('#idealDay')?.value || '',
             },
         };
@@ -698,7 +720,6 @@
                 selectedEpisodeIds: state.selectedEpisodeIds,
                 diagnoses: state.diagnoses,
                 barrier: state.barrier,
-                schoolMessage: $('#schoolMessage')?.value || '',
                 currentPart: state.currentPart,
                 episodeIdCounter,
             }));
@@ -720,7 +741,6 @@
                 state.selectedEpisodeIds = saved.selectedEpisodeIds || [];
                 state.diagnoses = saved.diagnoses || {};
                 state.barrier = saved.barrier || null;
-                state.schoolMessage = saved.schoolMessage || '';
                 // Restore barrier UI
                 if (state.barrier) {
                     const opt = $(`.barrier-option[data-value="${state.barrier}"]`);
@@ -728,10 +748,6 @@
                         opt.classList.add('selected');
                         opt.querySelector('input').checked = true;
                     }
-                }
-                if (state.schoolMessage) {
-                    const ta = $('#schoolMessage');
-                    if (ta) ta.value = state.schoolMessage;
                 }
                 return true;
             }
