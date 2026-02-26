@@ -1,170 +1,113 @@
-// ========================================================
-// DRM Survey — Google Apps Script Backend
-// 3개 시트에 개별 셀로 저장
-//   - Responses : 응답 종합 (1행 = 1명)
-//   - Episodes  : 에피소드 (1행 = 1에피소드)
-//   - Diagnoses : 진단 결과 (1행 = 1진단)
-// ========================================================
+/* =========================================================================
+   DRM Survey - Google Apps Script Backend (Updated for Part 3 Revision)
+   Sheets: Responses, Episodes, Diagnoses
+   - Removed: Policy ranking (Q10), SchoolMessage (Q11)
+   - Changed: InformationSource -> InformationSources (checkbox array) + InformationSourceEtc
+   ========================================================================= */
 
-// ★ 관리자 비밀번호
 const ADMIN_PASSWORD = 'drm2026admin';
 
-// ──────────────── POST: 설문 저장 ────────────────
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-
     const respondentId = Utilities.getUuid();
     const timestamp = new Date().toISOString();
 
     const episodes = data.episodes || [];
     const diagnoses = data.diagnoses || [];
-    const barrier = data.globalReflection ? data.globalReflection.biggestBarrier || '' : '';
+    const reflection = data.globalReflection || {};
 
-    // 1) Responses 시트 — 종합 정보
-    const respSheet = getOrCreateSheet(ss, 'Responses', [
-      '응답시각', '응답자ID', '에피소드수', '진단수', '가장큰장벽'
-    ]);
+    // 1. Responses Sheet
+    const respHeaders = [
+      'Timestamp', 'RespondentID', 'PhoneNumber', 'EpisodeCount', 'DiagnosisCount',
+      'Barrier',
+      'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoSources', 'InfoDesert',
+      'TimeUse1', 'TimeUse2', 'TimeUse3', 'TimeUse4', 'TimeDesign',
+      'OppAccess1', 'OppAccess2', 'OppAccess3', 'OppAccess4', 'OppImprove',
+      'WB_Happy', 'WB_Confident', 'WB_Growth', 'WB_Anxious', 'WB_Bored', 'WB_Depressed',
+      'IdealDay'
+    ];
+
+    var respSheet = getOrCreateSheet(ss, 'Responses', respHeaders);
+
     respSheet.appendRow([
-      timestamp, respondentId,
-      episodes.length, diagnoses.length,
-      barrier
+      timestamp,
+      respondentId,
+      data.phoneNumber || '',
+      episodes.length,
+      diagnoses.length,
+      reflection.biggestBarrier || '',
+      reflection.infoAccess1 || '', reflection.infoAccess2 || '', reflection.infoAccess3 || '',
+      Array.isArray(reflection.infoSources) ? reflection.infoSources.join(', ') : '',
+      reflection.infoDesertExperience || '',
+      reflection.timeUse1 || '', reflection.timeUse2 || '', reflection.timeUse3 || '', reflection.timeUse4 || '',
+      reflection.timeDesignSuggestion || '',
+      reflection.oppAccess1 || '', reflection.oppAccess2 || '', reflection.oppAccess3 || '', reflection.oppAccess4 || '',
+      reflection.oppImproveSuggestion || '',
+      reflection.wb_happy || '', reflection.wb_confident || '', reflection.wb_growth || '',
+      reflection.wb_anxious || '', reflection.wb_bored || '', reflection.wb_depressed || '',
+      reflection.idealDay || ''
     ]);
 
-    // 2) Episodes 시트 — 에피소드 상세
-    const epSheet = getOrCreateSheet(ss, 'Episodes', [
-      '응답자ID', '에피소드번호', '시작시간', '종료시간', '활동내용', '장소', '동행인'
-    ]);
+    // 2. Episodes Sheet
+    var epHeaders = ['RespondentID', 'EpisodeNum', 'StartTime', 'EndTime', 'Activity', 'Location', 'Companion'];
+    var epSheet = getOrCreateSheet(ss, 'Episodes', epHeaders);
     episodes.forEach(function(ep, i) {
       epSheet.appendRow([
-        respondentId, i + 1,
-        ep.startTime || '', ep.endTime || '',
+        respondentId, i + 1, ep.startTime || '', ep.endTime || '',
         ep.activity || '', ep.location || '', ep.companion || ''
       ]);
     });
 
-    // 3) Diagnoses 시트 — 진단 상세
-    const diagSheet = getOrCreateSheet(ss, 'Diagnoses', [
-      '응답자ID', '에피소드ID', '활동', '정보', '정보원', '정보원_기타', '시간지각',
-      '기회_선택', '기회_유연', '즐거움', '자신감', '불안함', '지루함'
-    ]);
+    // 3. Diagnoses Sheet
+    var diagHeaders = [
+      'RespondentID', 'EpisodeID', 'Activity', 'Information', 'InformationSources', 'InformationSourceEtc',
+      'TimePerception', 'OpportunityChosen', 'OpportunityFlexible',
+      'Joy', 'Confidence', 'Anxiety', 'Boredom'
+    ];
+    var diagSheet = getOrCreateSheet(ss, 'Diagnoses', diagHeaders);
     diagnoses.forEach(function(d) {
-      var infoSources = Array.isArray(d.informationSources) ? d.informationSources.join(', ') : (d.informationSource || '');
-      var infoSourceEtc = d.informationSourceEtc || '';
+      var infoSrc = Array.isArray(d.informationSources) ? d.informationSources.join(', ') : (d.informationSource || '');
+      var infoSrcEtc = d.informationSourceEtc || '';
       diagSheet.appendRow([
-        respondentId, d.episodeId || '',
-        d.activity || '', d.information || '', infoSources, infoSourceEtc,
-        d.time || '', d.opportunityChosen || '', d.opportunityFlexible || '',
-        d.wellbeing_joy != null ? d.wellbeing_joy : '',
-        d.wellbeing_confidence != null ? d.wellbeing_confidence : '',
-        d.wellbeing_anxiety != null ? d.wellbeing_anxiety : '',
-        d.wellbeing_boredom != null ? d.wellbeing_boredom : ''
+        respondentId, d.episodeId, d.activity || '',
+        d.information || '', infoSrc, infoSrcEtc, d.time || '',
+        d.opportunityChosen || '', d.opportunityFlexible || '',
+        d.wellbeing_joy, d.wellbeing_confidence, d.wellbeing_anxiety, d.wellbeing_boredom
       ]);
     });
 
-    return createJsonResponse({
-      success: true,
-      respondentId: respondentId,
-      message: 'saved'
-    });
-
-  } catch (error) {
-    return createJsonResponse({ success: false, error: error.toString() });
+    return createJsonResponse({ success: true, respondentId: respondentId });
+  } catch (err) {
+    return createJsonResponse({ success: false, error: err.toString() });
   }
 }
 
-// ──────────────── GET: 관리자 데이터 조회 ────────────────
 function doGet(e) {
-  try {
-    var password = e.parameter.password;
-    if (password !== ADMIN_PASSWORD) {
-      return createJsonResponse({ success: false, error: 'auth failed' });
-    }
-
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-
-    // 1) Responses 읽기
-    var respSheet = ss.getSheetByName('Responses');
-    if (!respSheet || respSheet.getLastRow() <= 1) {
-      return createJsonResponse({ success: true, data: [], count: 0 });
-    }
-    var respData = respSheet.getRange(2, 1, respSheet.getLastRow() - 1, 5).getValues();
-
-    // 2) Episodes 읽기 → respondentId별 그룹
-    var episodesMap = {};
-    var epSheet = ss.getSheetByName('Episodes');
-    if (epSheet && epSheet.getLastRow() > 1) {
-      var epRows = epSheet.getRange(2, 1, epSheet.getLastRow() - 1, 7).getValues();
-      epRows.forEach(function(row) {
-        var rid = row[0];
-        if (!episodesMap[rid]) episodesMap[rid] = [];
-        episodesMap[rid].push({
-          id: row[1], startTime: row[2], endTime: row[3],
-          activity: row[4], location: row[5], companion: row[6]
-        });
-      });
-    }
-
-    // 3) Diagnoses 읽기 → respondentId별 그룹
-    var diagMap = {};
-    var diagSheet = ss.getSheetByName('Diagnoses');
-    if (diagSheet && diagSheet.getLastRow() > 1) {
-      var dRows = diagSheet.getRange(2, 1, diagSheet.getLastRow() - 1, 13).getValues();
-      dRows.forEach(function(row) {
-        var rid = row[0];
-        if (!diagMap[rid]) diagMap[rid] = [];
-        diagMap[rid].push({
-          episodeId: row[1], activity: row[2],
-          information: row[3], informationSources: row[4], informationSourceEtc: row[5], time: row[6],
-          opportunityChosen: row[7], opportunityFlexible: row[8],
-          wellbeing_joy: row[9], wellbeing_confidence: row[10],
-          wellbeing_anxiety: row[11], wellbeing_boredom: row[12]
-        });
-      });
-    }
-
-    // 4) 조합하여 반환
-    var responses = respData.map(function(row) {
-      var rid = row[1];
-      return {
-        timestamp: row[0] instanceof Date ? row[0].toISOString() : row[0],
-        respondentId: rid,
-        episodes: episodesMap[rid] || [],
-        diagnoses: diagMap[rid] || [],
-        barrier: row[4]
-      };
-    });
-
-    return createJsonResponse({
-      success: true,
-      data: responses,
-      count: responses.length
-    });
-
-  } catch (error) {
-    return createJsonResponse({ success: false, error: error.toString() });
+  if (e.parameter.pw !== ADMIN_PASSWORD) {
+    return createJsonResponse({ error: 'Unauthorized' });
   }
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const result = {};
+  ['Responses', 'Episodes', 'Diagnoses'].forEach(name => {
+    const sheet = ss.getSheetByName(name);
+    if (sheet) result[name] = sheet.getDataRange().getValues();
+  });
+  return createJsonResponse(result);
 }
 
-// ──────────────── 유틸리티 ────────────────
 function getOrCreateSheet(ss, name, headers) {
   var sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
     sheet.appendRow(headers);
-    // 헤더 서식
-    var headerRange = sheet.getRange(1, 1, 1, headers.length);
-    headerRange.setFontWeight('bold');
-    headerRange.setBackground('#4a86c8');
-    headerRange.setFontColor('#ffffff');
-    sheet.setFrozenRows(1);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#f3f3f3');
   }
   return sheet;
 }
 
 function createJsonResponse(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
+  return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
