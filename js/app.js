@@ -861,7 +861,6 @@
         });
 
         completeBtn.addEventListener('click', async () => {
-            state.schoolMessage = $('#schoolMessage').value;
             saveState();
             goToPart('done');
 
@@ -876,11 +875,7 @@
         // Barrier options
         setupBarrierOptions();
 
-        // School message autosave
-        $('#schoolMessage').addEventListener('input', () => {
-            state.schoolMessage = $('#schoolMessage').value;
-            saveState();
-        });
+
 
         // Progress step click navigation
         $$('.progress-step__circle').forEach((circle) => {
