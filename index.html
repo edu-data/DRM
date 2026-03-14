@@ -56,15 +56,15 @@
       <div class="intro-hero">
         <div class="intro-hero__icon">🔬</div>
         <h2 class="intro-hero__title">일상재구성법(DRM) 설문조사</h2>
-        <p class="intro-hero__subtitle">고교생의 일상 속 정보·시간·기회를 진단합니다</p>
+        <p class="intro-hero__subtitle">PERMA 웰빙 모형 기반 · 고교생의 일상 속 정보·시간·기회·핵심 가치를 진단합니다</p>
       </div>
 
       <!-- 연구의 목적 -->
       <div class="glass-card intro-card">
         <h3 class="intro-card__heading">🎯 연구의 목적</h3>
         <p class="intro-card__text">
-          이 연구는 고등학생의 일상 경험과 느낌을 파악하며 고교 교육의 현실을 파악하기 위한 목적입니다.
-          이를 위해 <strong>정보</strong>, <strong>시간</strong>, <strong>기회</strong>의 세 가지 축을 중심으로 질문하고 분석하고자 합니다.
+          이 연구는 <strong>DRM(일상재구성법)</strong>을 활용하여 고등학생의 일상 에피소드 속 웰빙 경험을 <strong>PERMA 모형</strong>(긍정정서·몰입·관계·의미·성취) 기반으로 진단하고,
+          <strong>진로 3렌즈</strong>(정보·시간·기회)와 <strong>5대 핵심 가치</strong>(실존적 안녕·주체적 성장·배움의 본질·다양성·연대)의 관계를 탐색합니다.
         </p>
       </div>
 
@@ -81,18 +81,18 @@
           <div class="intro-step__content">
             <div class="intro-step__title">일과 재구성 (Diary Reconstruction)</div>
             <p class="intro-step__desc">
-              전날 아침부터 잠들기 전까지의 일과를 <strong>~10개 내외의 에피소드</strong>로 구분합니다.
+              전날 아침부터 잠들기 전까지의 일과를 <strong>10개 에피소드</strong>로 구분합니다.
             </p>
             <div class="intro-examples">
               <span class="intro-examples__label">예시</span>
               <div class="intro-examples__items">
-                <span class="intro-example-tag">등교 시간</span>
-                <span class="intro-example-tag">1교시 수학 수업</span>
+                <span class="intro-example-tag">등교 및 조례</span>
+                <span class="intro-example-tag">1교시 — 화법과 작문</span>
+                <span class="intro-example-tag">2교시 — 수학Ⅱ</span>
                 <span class="intro-example-tag">점심시간</span>
-                <span class="intro-example-tag">방과 후 학원</span>
-                <span class="intro-example-tag">저녁 식사</span>
-                <span class="intro-example-tag">유튜브 시청</span>
-                <span class="intro-example-tag">자율학습</span>
+                <span class="intro-example-tag">5~6교시 — 생명과학Ⅱ</span>
+                <span class="intro-example-tag">방과 후 활동</span>
+                <span class="intro-example-tag">귀가 및 저녁식사</span>
               </div>
             </div>
           </div>
@@ -131,9 +131,9 @@
         <div class="intro-step">
           <div class="intro-step__number">3</div>
           <div class="intro-step__content">
-            <div class="intro-step__title">정서 및 웰빙 측정</div>
+            <div class="intro-step__title">PERMA 웰빙 측정</div>
             <p class="intro-step__desc">
-              각 에피소드에서 느낀 <strong>긍정 정서</strong>(즐거움, 자신감)와 <strong>부정 정서</strong>(불안, 지루함)를 7점 척도로 기록합니다.
+              각 에피소드에서 느낀 <strong>PERMA 5요소</strong>(긍정정서·몰입·관계·의미·성취)와 <strong>부정 정서</strong>(불안·스트레스)를 7점 척도로 기록합니다.
             </p>
           </div>
         </div>
@@ -141,9 +141,9 @@
         <div class="intro-step">
           <div class="intro-step__number">4</div>
           <div class="intro-step__content">
-            <div class="intro-step__title">종합 의견</div>
+            <div class="intro-step__title">종합 진단</div>
             <p class="intro-step__desc">
-              하루 전체를 돌아보며 나의 일상 속 <strong>정보·시간·기회</strong>에 대한 종합적인 성찰과 학교에 바라는 점을 자유롭게 적습니다.
+              하루 전체를 돌아보며 <strong>정보·시간·기회</strong>에 대한 성찰, <strong>PERMA 웰빙 자가 진단</strong>, <strong>5대 핵심 가치 학교 경험 진단</strong>을 수행합니다.
             </p>
           </div>
         </div>
@@ -167,8 +167,9 @@
         <div class="form-group" style="max-width: 360px; margin: 0.8rem auto 0;">
           <label class="form-label" for="phoneNumber">📱 핸드폰 번호</label>
           <input type="tel" class="form-input" id="phoneNumber" placeholder="예: 010-1234-5678"
-            pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"
+            pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required
             style="text-align: center; font-size: 1.1rem; letter-spacing: 1px;" />
+          <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:0.3rem; text-align:center;">* 사례비 지급을 위해 반드시 입력해 주세요</p>
         </div>
       </div>
 
@@ -605,96 +606,297 @@
           rows="4"></textarea>
       </div>
 
-      <!-- ═══ Q9: 전반적 웰빙 자가 진단 ═══ -->
+      <!-- ═══ Q9: PERMA 웰빙 종합 ═══ -->
       <div class="glass-card">
         <h3 class="part3-q-title">
-          <span class="part3-q-badge part3-q-badge--well">💚 웰빙</span>
-          Q9. 전반적 웰빙 자가 진단
+          <span class="part3-q-badge part3-q-badge--well">💜 PERMA</span>
+          Q9. 전반적 PERMA 웰빙
         </h3>
         <p class="part3-q-desc">
-          어제 <strong>하루 전체</strong>를 떠올렸을 때, 다음 감정을 얼마나 느꼈나요?<br>
+          어제 <strong>하루 전체</strong>를 떠올렸을 때, 다음 항목을 얼마나 경험했나요?<br>
           <span class="part3-scale-hint">(1점: 전혀 아님 ← → 7점: 매우 그렇다)</span>
         </p>
         <div class="likert-group" id="likertWellbeing">
           <div class="likert-item">
-            <span class="likert-item__label">😊 즐거움/행복감</span>
-            <div class="likert-scale" data-name="wb_happy">
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_happy" value="7"><span>7</span></label>
+            <span class="likert-item__label">😊 P — 긍정 정서: 즐거움·기쁨을 느꼈다</span>
+            <div class="likert-scale" data-name="wb_P">
+              <label class="likert-radio"><input type="radio" name="wb_P" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_P" value="7"><span>7</span></label>
             </div>
           </div>
           <div class="likert-item">
-            <span class="likert-item__label">💪 자신감/자기효능감</span>
-            <div class="likert-scale" data-name="wb_confident">
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_confident" value="7"><span>7</span></label>
+            <span class="likert-item__label">🎯 E — 몰입: 무언가에 완전히 몰입했다</span>
+            <div class="likert-scale" data-name="wb_E">
+              <label class="likert-radio"><input type="radio" name="wb_E" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_E" value="7"><span>7</span></label>
             </div>
           </div>
           <div class="likert-item">
-            <span class="likert-item__label">🌱 성장하고 있다는 느낌</span>
-            <div class="likert-scale" data-name="wb_growth">
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_growth" value="7"><span>7</span></label>
+            <span class="likert-item__label">🤝 R — 관계: 사람들과 긍정적 관계를 느꼈다</span>
+            <div class="likert-scale" data-name="wb_R">
+              <label class="likert-radio"><input type="radio" name="wb_R" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_R" value="7"><span>7</span></label>
             </div>
           </div>
           <div class="likert-item">
-            <span class="likert-item__label">😰 불안감/초조함</span>
-            <div class="likert-scale" data-name="wb_anxious">
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_anxious" value="7"><span>7</span></label>
+            <span class="likert-item__label">💡 M — 의미: 하루가 의미 있다고 느꼈다</span>
+            <div class="likert-scale" data-name="wb_M">
+              <label class="likert-radio"><input type="radio" name="wb_M" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_M" value="7"><span>7</span></label>
             </div>
           </div>
           <div class="likert-item">
-            <span class="likert-item__label">😴 지루함/무기력함</span>
-            <div class="likert-scale" data-name="wb_bored">
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_bored" value="7"><span>7</span></label>
+            <span class="likert-item__label">🏆 A — 성취: 성취감을 느꼈다</span>
+            <div class="likert-scale" data-name="wb_A">
+              <label class="likert-radio"><input type="radio" name="wb_A" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_A" value="7"><span>7</span></label>
             </div>
           </div>
           <div class="likert-item">
-            <span class="likert-item__label">😞 우울함/슬픔</span>
-            <div class="likert-scale" data-name="wb_depressed">
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="1"><span>1</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="2"><span>2</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="3"><span>3</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="4"><span>4</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="5"><span>5</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="6"><span>6</span></label>
-              <label class="likert-radio"><input type="radio" name="wb_depressed" value="7"><span>7</span></label>
+            <span class="likert-item__label">😰 N — 부정 정서: 불안·지루함·스트레스를 느꼈다</span>
+            <div class="likert-scale" data-name="wb_N">
+              <label class="likert-radio"><input type="radio" name="wb_N" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="wb_N" value="7"><span>7</span></label>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ Q10: 어제 vs 이상적 하루 (개방형) ═══ -->
+      <!-- ═══ Q10: 5대 핵심 가치 진단 ═══ -->
       <div class="glass-card">
         <h3 class="part3-q-title">
-          ✨ Q10. 나의 이상적인 하루
+          <span class="part3-q-badge part3-q-badge--well">🏫 핵심 가치</span>
+          Q10. 5대 핵심 가치 진단
+        </h3>
+        <p class="part3-q-desc">
+          나의 <strong>학교 경험</strong>에 대해 다음 문항을 읽고 해당하는 정도를 선택해 주세요.<br>
+          <span class="part3-scale-hint">(1점: 전혀 그렇지 않다 ← → 7점: 매우 그렇다)</span>
+        </p>
+        <div class="likert-group" id="likertCoreValues">
+          <div class="likert-item">
+            <span class="likert-item__label">(A) 수업 시간에 실수를 해도 창피를 당하지 않는다</span>
+            <div class="likert-scale" data-name="cv_A">
+              <label class="likert-radio"><input type="radio" name="cv_A" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_A" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(B) 나는 이 학교에서 있는 그대로 존중받고 있다</span>
+            <div class="likert-scale" data-name="cv_B">
+              <label class="likert-radio"><input type="radio" name="cv_B" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_B" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(C) 문제를 해결하기 위해 새로운 아이디어를 제안·실행해 본 적이 있다</span>
+            <div class="likert-scale" data-name="cv_C">
+              <label class="likert-radio"><input type="radio" name="cv_C" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_C" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(D) 학교의 중요한 결정에 내 의견이 반영된다</span>
+            <div class="likert-scale" data-name="cv_D">
+              <label class="likert-radio"><input type="radio" name="cv_D" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_D" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(E) '왜 그럴까?'를 깊이 생각하고 탐구하는 수업이다</span>
+            <div class="likert-scale" data-name="cv_E">
+              <label class="likert-radio"><input type="radio" name="cv_E" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_E" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(F) 수업 시간이 나에게 의미있고 흥미롭다</span>
+            <div class="likert-scale" data-name="cv_F">
+              <label class="likert-radio"><input type="radio" name="cv_F" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_F" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(G) 공부를 잘하지 않아도 내 꿈은 가치있게 여겨진다</span>
+            <div class="likert-scale" data-name="cv_G">
+              <label class="likert-radio"><input type="radio" name="cv_G" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_G" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(H) 나의 학습 속도에 맞춰 시간표를 조정할 수 있다</span>
+            <div class="likert-scale" data-name="cv_H">
+              <label class="likert-radio"><input type="radio" name="cv_H" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_H" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(I) 지역의 문제가 세계적 문제와 연결되어 있음을 배운다</span>
+            <div class="likert-scale" data-name="cv_I">
+              <label class="likert-radio"><input type="radio" name="cv_I" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_I" value="7"><span>7</span></label>
+            </div>
+          </div>
+          <div class="likert-item">
+            <span class="likert-item__label">(J) 학교가 지역사회 자원과 연결되어 배움의 기회를 넓혀 준다</span>
+            <div class="likert-scale" data-name="cv_J">
+              <label class="likert-radio"><input type="radio" name="cv_J" value="1"><span>1</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="2"><span>2</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="3"><span>3</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="4"><span>4</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="5"><span>5</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="6"><span>6</span></label>
+              <label class="likert-radio"><input type="radio" name="cv_J" value="7"><span>7</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Q11: 학교 경험 종합 성찰 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--well">🏫 핵심 가치</span>
+          Q11. 학교 경험 종합 성찰
+        </h3>
+        <p class="part3-q-desc">
+          학교 생활 중 <strong>가장 인상 깊었던 순간</strong>은 언제인가요? 그 순간이 왜 특별했는지 자유롭게 적어 주세요.
+        </p>
+        <textarea class="form-textarea" id="schoolExperienceReflection"
+          placeholder="예시 답변: 진로 수업 시간에 선생님이 '성적이 아니라 너의 관심이 가장 중요하다'고 말씀해 주셨을 때, 처음으로 내 꿈이 인정받는 느낌이었습니다."
+          rows="4"></textarea>
+      </div>
+
+      <!-- ═══ Q12: 가장 변화가 필요한 핵심 가치 ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          <span class="part3-q-badge part3-q-badge--well">🏫 핵심 가치</span>
+          Q12. 가장 변화가 필요한 영역
+        </h3>
+        <p class="part3-q-desc">
+          다음 5가지 중 우리 학교에서 <strong>가장 변화가 필요하다</strong>고 느끼는 영역을 하나만 골라 주세요.
+        </p>
+        <div class="barrier-options" id="coreValueOptions">
+          <label class="barrier-option" data-value="1">
+            <input type="radio" name="mostNeededValue" value="1" />
+            <div class="barrier-option__icon">🛡️</div>
+            <div class="barrier-option__content">
+              <div class="barrier-option__title">실존적 안녕</div>
+              <div class="barrier-option__desc">심리적 안전·존중</div>
+            </div>
+          </label>
+          <label class="barrier-option" data-value="2">
+            <input type="radio" name="mostNeededValue" value="2" />
+            <div class="barrier-option__icon">🌱</div>
+            <div class="barrier-option__content">
+              <div class="barrier-option__title">주체적 성장</div>
+              <div class="barrier-option__desc">참여·자치·변혁적 역량</div>
+            </div>
+          </label>
+          <label class="barrier-option" data-value="3">
+            <input type="radio" name="mostNeededValue" value="3" />
+            <div class="barrier-option__icon">📚</div>
+            <div class="barrier-option__content">
+              <div class="barrier-option__title">배움의 본질</div>
+              <div class="barrier-option__desc">깊이 있는 학습·포용</div>
+            </div>
+          </label>
+          <label class="barrier-option" data-value="4">
+            <input type="radio" name="mostNeededValue" value="4" />
+            <div class="barrier-option__icon">🌈</div>
+            <div class="barrier-option__content">
+              <div class="barrier-option__title">다양성</div>
+              <div class="barrier-option__desc">진로·학사 유연성</div>
+            </div>
+          </label>
+          <label class="barrier-option" data-value="5">
+            <input type="radio" name="mostNeededValue" value="5" />
+            <div class="barrier-option__icon">🤝</div>
+            <div class="barrier-option__content">
+              <div class="barrier-option__title">연대</div>
+              <div class="barrier-option__desc">글로컬·지역사회 연계</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- ═══ Q13: 이상적인 하루 (개방형) ═══ -->
+      <div class="glass-card">
+        <h3 class="part3-q-title">
+          ✨ Q13. 나의 이상적인 하루
         </h3>
         <p class="part3-q-desc">
           어제의 실제 하루와 비교했을 때, <strong>나에게 이상적인 하루</strong>는 어떤 모습인가요? 자유롭게 그려 주세요.

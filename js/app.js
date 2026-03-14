@@ -269,7 +269,7 @@
                 time: null,
                 opportunityChosen: null,
                 opportunityFlexible: null,
-                wellbeing: { joy: 4, confidence: 4, anxiety: 4, boredom: 4 },
+                wellbeing: { positiveEmotion: 4, engagement: 4, relationships: 4, meaning: 4, accomplishment: 4, negativeEmotion: 4 },
             };
 
             const uid = `diag_${id}`;
@@ -389,20 +389,22 @@
           </label>
         </div>
 
-        <!-- 4. Well-being -->
+        <!-- 4. PERMA Well-being -->
         <div class="diagnosis-section-divider">
           <div class="diagnosis-section-divider__line"></div>
-          <span class="diagnosis-section-divider__label">💜 웰빙 (Well-being)</span>
+          <span class="diagnosis-section-divider__label">💜 PERMA 웰빙</span>
           <div class="diagnosis-section-divider__line"></div>
         </div>
         <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
-          이 활동 중 느꼈던 감정의 점수를 매겨 주세요. (1점: 전혀 아님 ~ 7점: 매우 그렇다)
+          이 활동 중 느꼈던 경험을 점수로 매겨 주세요. (1점: 전혀 아님 ~ 7점: 매우 그렇다)
         </p>
 
-        ${buildSlider(id, 'joy', '😊 즐거움')}
-        ${buildSlider(id, 'confidence', '💪 자신감')}
-        ${buildSlider(id, 'anxiety', '😰 불안함')}
-        ${buildSlider(id, 'boredom', '😑 지루함')}
+        ${buildSlider(id, 'positiveEmotion', '😊 P — 긍정 정서: 즐거움·기쁨을 느꼈다')}
+        ${buildSlider(id, 'engagement', '🎯 E — 몰입: 이 활동에 완전히 몰입했다')}
+        ${buildSlider(id, 'relationships', '🤝 R — 관계: 함께한 사람과 긍정적 관계를 느꼈다')}
+        ${buildSlider(id, 'meaning', '💡 M — 의미: 이 활동이 의미 있다고 느꼈다')}
+        ${buildSlider(id, 'accomplishment', '🏆 A — 성취: 성취감을 느꼈다')}
+        ${buildSlider(id, 'negativeEmotion', '😰 N — 부정 정서: 불안·지루함·스트레스를 느꼈다')}
       `;
 
             // Bind radio groups
@@ -486,20 +488,19 @@
         $('#statEpisodes').textContent = state.episodes.length;
         $('#statDiagnosed').textContent = state.selectedEpisodeIds.length;
 
-        // Average wellbeing (average of positive minus negative)
+        // Average PERMA wellbeing (mean of P·E·R·M·A)
         const diags = Object.values(state.diagnoses);
         if (diags.length > 0) {
             let total = 0;
             let count = 0;
             diags.forEach((d) => {
                 const w = d.wellbeing;
-                const pos = (w.joy + w.confidence) / 2;
-                const neg = (w.anxiety + w.boredom) / 2;
-                total += pos - neg;
+                const perma = (w.positiveEmotion + w.engagement + w.relationships + w.meaning + w.accomplishment) / 5;
+                total += perma;
                 count++;
             });
             const avg = total / count;
-            $('#statAvgWellbeing').textContent = avg >= 0 ? `+${avg.toFixed(1)}` : avg.toFixed(1);
+            $('#statAvgWellbeing').textContent = avg.toFixed(1);
         }
     }
 
@@ -549,10 +550,12 @@
                     time: d.time,
                     opportunityChosen: d.opportunityChosen,
                     opportunityFlexible: d.opportunityFlexible,
-                    wellbeing_joy: d.wellbeing.joy,
-                    wellbeing_confidence: d.wellbeing.confidence,
-                    wellbeing_anxiety: d.wellbeing.anxiety,
-                    wellbeing_boredom: d.wellbeing.boredom,
+                    wellbeing_P: d.wellbeing.positiveEmotion,
+                    wellbeing_E: d.wellbeing.engagement,
+                    wellbeing_R: d.wellbeing.relationships,
+                    wellbeing_M: d.wellbeing.meaning,
+                    wellbeing_A: d.wellbeing.accomplishment,
+                    wellbeing_N: d.wellbeing.negativeEmotion,
                 };
             }),
             globalReflection: {
@@ -580,14 +583,29 @@
                 oppAccess4: getLikertValue('oppAccess4'),
                 // Q8: 기회 구조 개선 (open-ended)
                 oppImproveSuggestion: $('#oppImproveSuggestion')?.value || '',
-                // Q9: 웰빙 자가 진단 (Likert)
-                wb_happy: getLikertValue('wb_happy'),
-                wb_confident: getLikertValue('wb_confident'),
-                wb_growth: getLikertValue('wb_growth'),
-                wb_anxious: getLikertValue('wb_anxious'),
-                wb_bored: getLikertValue('wb_bored'),
-                wb_depressed: getLikertValue('wb_depressed'),
-                // Q10: 이상적인 하루 (open-ended)
+                // Q9: PERMA 웰빙 (Likert)
+                wb_P: getLikertValue('wb_P'),
+                wb_E: getLikertValue('wb_E'),
+                wb_R: getLikertValue('wb_R'),
+                wb_M: getLikertValue('wb_M'),
+                wb_A: getLikertValue('wb_A'),
+                wb_N: getLikertValue('wb_N'),
+                // Q10: 5대 핵심 가치 진단 (Likert)
+                cv_A: getLikertValue('cv_A'),
+                cv_B: getLikertValue('cv_B'),
+                cv_C: getLikertValue('cv_C'),
+                cv_D: getLikertValue('cv_D'),
+                cv_E: getLikertValue('cv_E'),
+                cv_F: getLikertValue('cv_F'),
+                cv_G: getLikertValue('cv_G'),
+                cv_H: getLikertValue('cv_H'),
+                cv_I: getLikertValue('cv_I'),
+                cv_J: getLikertValue('cv_J'),
+                // Q11: 학교 경험 종합 성찰 (open-ended)
+                schoolExperienceReflection: $('#schoolExperienceReflection')?.value || '',
+                // Q12: 가장 변화 필요한 핵심 가치 (single choice)
+                mostNeededValue: getLikertValue('mostNeededValue'),
+                // Q13: 이상적인 하루 (open-ended)
                 idealDay: $('#idealDay')?.value || '',
             },
         };
@@ -796,16 +814,16 @@
 
         // 경기도 고등학교 일과 기본 템플릿 (10개 에피소드)
         if (!loaded) {
-            createEpisode({ startTime: '08:20', endTime: '08:50', activity: '등교 및 조례', location: '학교 교실', companion: '담임선생님, 반 친구들' });
-            createEpisode({ startTime: '09:00', endTime: '09:50', activity: '1교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '10:00', endTime: '10:50', activity: '2교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '11:00', endTime: '11:50', activity: '3교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '12:00', endTime: '12:50', activity: '4교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '12:50', endTime: '13:40', activity: '점심시간', location: '급식실 / 교실', companion: '친구들' });
-            createEpisode({ startTime: '13:40', endTime: '15:20', activity: '5~6교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '15:30', endTime: '16:30', activity: '7교시 수업', location: '학교 교실', companion: '교과선생님, 반 친구들' });
-            createEpisode({ startTime: '16:30', endTime: '18:00', activity: '방과 후 활동 / 자율학습', location: '학교 / 학원', companion: '친구들, 선생님' });
-            createEpisode({ startTime: '18:00', endTime: '19:00', activity: '귀가 및 저녁식사', location: '집', companion: '가족' });
+            createEpisode({ startTime: '08:20', endTime: '08:50', activity: '등교 및 조례', location: '교실', companion: '반 친구들, 담임선생님' });
+            createEpisode({ startTime: '09:00', endTime: '09:50', activity: '1교시 — 화법과 작문', location: '교실', companion: '반 친구들, 국어 선생님' });
+            createEpisode({ startTime: '10:00', endTime: '10:50', activity: '2교시 — 수학Ⅱ', location: '교실', companion: '반 친구들, 수학 선생님' });
+            createEpisode({ startTime: '11:00', endTime: '11:50', activity: '3교시 — 영어Ⅱ', location: '어학실', companion: '반 친구들, 영어 선생님' });
+            createEpisode({ startTime: '12:00', endTime: '12:50', activity: '4교시 — 한국사', location: '교실', companion: '반 친구들, 사회 선생님' });
+            createEpisode({ startTime: '12:50', endTime: '13:40', activity: '점심시간', location: '급식실, 운동장', companion: '친한 친구들' });
+            createEpisode({ startTime: '13:40', endTime: '15:20', activity: '5~6교시 — 생명과학Ⅱ / 진로와 직업', location: '과학실, 진로상담실', companion: '반 친구들, 과학/진로 선생님' });
+            createEpisode({ startTime: '15:30', endTime: '16:30', activity: '7교시 — 체육', location: '체육관', companion: '반 친구들, 체육 선생님' });
+            createEpisode({ startTime: '16:30', endTime: '18:00', activity: '방과 후 활동 / 자율학습', location: '도서관, 교실', companion: '동아리 친구들, 혼자' });
+            createEpisode({ startTime: '18:00', endTime: '19:00', activity: '귀가 및 저녁식사', location: '집, 학원', companion: '가족, 혼자' });
         }
 
         // Hide progress bar on intro screen (default view)
@@ -818,7 +836,22 @@
         // Intro → Part 1
         const startSurveyBtn = $('#startSurveyBtn');
         if (startSurveyBtn) {
-            startSurveyBtn.addEventListener('click', () => goToPart(1));
+            startSurveyBtn.addEventListener('click', () => {
+                const phoneInput = $('#phoneNumber');
+                const phoneVal = phoneInput?.value?.trim() || '';
+                if (!phoneVal) {
+                    showToast('핸드폰 번호를 입력해 주세요.', 'error');
+                    phoneInput?.focus();
+                    return;
+                }
+                // Basic format check: 010-xxxx-xxxx or 01x-xxx-xxxx
+                if (!/^01[0-9]-[0-9]{3,4}-[0-9]{4}$/.test(phoneVal)) {
+                    showToast('올바른 핸드폰 번호 형식으로 입력해 주세요. (예: 010-1234-5678)', 'error');
+                    phoneInput?.focus();
+                    return;
+                }
+                goToPart(1);
+            });
         }
 
         addEpisodeBtn.addEventListener('click', () => {
