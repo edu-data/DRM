@@ -1,8 +1,9 @@
 /* =========================================================================
-   DRM Survey - Google Apps Script Backend (Updated for Part 3 Revision)
+   DRM Survey - Google Apps Script Backend (PERMA + 5대 핵심 가치 적용)
    Sheets: Responses, Episodes, Diagnoses
-   - Removed: Policy ranking (Q10), SchoolMessage (Q11)
-   - Changed: InformationSource -> InformationSources (checkbox array) + InformationSourceEtc
+   - PERMA 웰빙: P(긍정정서), E(몰입), R(관계), M(의미), A(성취), N(부정정서)
+   - 5대 핵심 가치: cv_A~cv_J (10개 영역)
+   - Q11: 학교 경험 성찰, Q12: 가장 변화 필요한 가치, Q13: 이상적 하루
    ========================================================================= */
 
 const ADMIN_PASSWORD = 'drm2026admin';
@@ -25,8 +26,9 @@ function doPost(e) {
       'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoSources', 'InfoDesert',
       'TimeUse1', 'TimeUse2', 'TimeUse3', 'TimeUse4', 'TimeDesign',
       'OppAccess1', 'OppAccess2', 'OppAccess3', 'OppAccess4', 'OppImprove',
-      'WB_Happy', 'WB_Confident', 'WB_Growth', 'WB_Anxious', 'WB_Bored', 'WB_Depressed',
-      'IdealDay'
+      'WB_P', 'WB_E', 'WB_R', 'WB_M', 'WB_A', 'WB_N',
+      'CV_A', 'CV_B', 'CV_C', 'CV_D', 'CV_E', 'CV_F', 'CV_G', 'CV_H', 'CV_I', 'CV_J',
+      'SchoolReflection', 'MostNeededValue', 'IdealDay'
     ];
 
     var respSheet = getOrCreateSheet(ss, 'Responses', respHeaders);
@@ -45,8 +47,12 @@ function doPost(e) {
       reflection.timeDesignSuggestion || '',
       reflection.oppAccess1 || '', reflection.oppAccess2 || '', reflection.oppAccess3 || '', reflection.oppAccess4 || '',
       reflection.oppImproveSuggestion || '',
-      reflection.wb_happy || '', reflection.wb_confident || '', reflection.wb_growth || '',
-      reflection.wb_anxious || '', reflection.wb_bored || '', reflection.wb_depressed || '',
+      reflection.wb_P || '', reflection.wb_E || '', reflection.wb_R || '',
+      reflection.wb_M || '', reflection.wb_A || '', reflection.wb_N || '',
+      reflection.cv_A || '', reflection.cv_B || '', reflection.cv_C || '', reflection.cv_D || '', reflection.cv_E || '',
+      reflection.cv_F || '', reflection.cv_G || '', reflection.cv_H || '', reflection.cv_I || '', reflection.cv_J || '',
+      reflection.schoolExperienceReflection || '',
+      reflection.mostNeededValue || '',
       reflection.idealDay || ''
     ]);
 
@@ -60,11 +66,11 @@ function doPost(e) {
       ]);
     });
 
-    // 3. Diagnoses Sheet
+    // 3. Diagnoses Sheet (PERMA)
     var diagHeaders = [
       'RespondentID', 'EpisodeID', 'Activity', 'Information', 'InformationSources', 'InformationSourceEtc',
       'TimePerception', 'OpportunityChosen', 'OpportunityFlexible',
-      'Joy', 'Confidence', 'Anxiety', 'Boredom'
+      'WB_P', 'WB_E', 'WB_R', 'WB_M', 'WB_A', 'WB_N'
     ];
     var diagSheet = getOrCreateSheet(ss, 'Diagnoses', diagHeaders);
     diagnoses.forEach(function(d) {
@@ -74,7 +80,7 @@ function doPost(e) {
         respondentId, d.episodeId, d.activity || '',
         d.information || '', infoSrc, infoSrcEtc, d.time || '',
         d.opportunityChosen || '', d.opportunityFlexible || '',
-        d.wellbeing_joy, d.wellbeing_confidence, d.wellbeing_anxiety, d.wellbeing_boredom
+        d.wellbeing_P, d.wellbeing_E, d.wellbeing_R, d.wellbeing_M, d.wellbeing_A, d.wellbeing_N
       ]);
     });
 
