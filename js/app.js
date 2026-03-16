@@ -269,7 +269,14 @@
                 time: null,
                 opportunityChosen: null,
                 opportunityFlexible: null,
-                wellbeing: { positiveEmotion: 4, engagement: 4, relationships: 4, meaning: 4, accomplishment: 4, negativeEmotion: 4 },
+                wellbeing: {
+                    P1: 4, P2: 4, P3: 4,
+                    E1: 4, E2: 4, E3: 4,
+                    R1: 4, R2: 4, R3: 4,
+                    M1: 4, M2: 4, M3: 4,
+                    A1: 4, A2: 4, A3: 4,
+                    N1: 4, N2: 4, N3: 4
+                },
             };
 
             const uid = `diag_${id}`;
@@ -399,12 +406,24 @@
           이 활동 중 느꼈던 경험을 점수로 매겨 주세요. (1점: 전혀 아님 ~ 7점: 매우 그렇다)
         </p>
 
-        ${buildSlider(id, 'positiveEmotion', '😊 P — 긍정 정서: 즐거움·기쁨을 느꼈다')}
-        ${buildSlider(id, 'engagement', '🎯 E — 몰입: 이 활동에 완전히 몰입했다')}
-        ${buildSlider(id, 'relationships', '🤝 R — 관계: 함께한 사람과 긍정적 관계를 느꼈다')}
-        ${buildSlider(id, 'meaning', '💡 M — 의미: 이 활동이 의미 있다고 느꼈다')}
-        ${buildSlider(id, 'accomplishment', '🏆 A — 성취: 성취감을 느꼈다')}
-        ${buildSlider(id, 'negativeEmotion', '😰 N — 부정 정서: 불안·지루함·스트레스를 느꼈다')}
+        ${buildSlider(id, 'P1', '😊 P1 — 이 활동 중 즐거움·기쁨을 느꼈다')}
+        ${buildSlider(id, 'P2', '😊 P2 — 이 활동 중 편안하고 따뜻한 기분이었다')}
+        ${buildSlider(id, 'P3', '😊 P3 — 이 활동 중 활력과 에너지를 느꼈다')}
+        ${buildSlider(id, 'E1', '🎯 E1 — 이 활동에 완전히 몰입했다')}
+        ${buildSlider(id, 'E2', '🎯 E2 — 시간 가는 줄 모를 정도로 집중했다')}
+        ${buildSlider(id, 'E3', '🎯 E3 — 하던 일에 푹 빠져들어 다른 생각이 들지 않았다')}
+        ${buildSlider(id, 'R1', '🤝 R1 — 함께한 사람과 긍정적 관계를 느꼈다')}
+        ${buildSlider(id, 'R2', '🤝 R2 — 누군가로부터 지지받고 있다고 느꼈다')}
+        ${buildSlider(id, 'R3', '🤝 R3 — 다른 사람에게 도움이 되거나 연결됨을 느꼈다')}
+        ${buildSlider(id, 'M1', '💡 M1 — 이 활동이 의미 있다고 느꼈다')}
+        ${buildSlider(id, 'M2', '💡 M2 — 이 활동이 나의 성장에 도움이 된다고 느꼈다')}
+        ${buildSlider(id, 'M3', '💡 M3 — 이 활동이 내 인생에서 중요한 부분이라고 느꼈다')}
+        ${buildSlider(id, 'A1', '🏆 A1 — 성취감을 느꼈다')}
+        ${buildSlider(id, 'A2', '🏆 A2 — 목표를 향해 진전하고 있다고 느꼈다')}
+        ${buildSlider(id, 'A3', '🏆 A3 — 내가 할 일을 잘 해냈다고 느꼈다')}
+        ${buildSlider(id, 'N1', '😰 N1 — 불안함을 느꼈다')}
+        ${buildSlider(id, 'N2', '😰 N2 — 지루함을 느꼈다')}
+        ${buildSlider(id, 'N3', '😰 N3 — 스트레스를 느꼈다')}
       `;
 
             // Bind radio groups
@@ -495,7 +514,7 @@
             let count = 0;
             diags.forEach((d) => {
                 const w = d.wellbeing;
-                const perma = (w.positiveEmotion + w.engagement + w.relationships + w.meaning + w.accomplishment) / 5;
+                const perma = (w.P1 + w.P2 + w.P3 + w.E1 + w.E2 + w.E3 + w.R1 + w.R2 + w.R3 + w.M1 + w.M2 + w.M3 + w.A1 + w.A2 + w.A3) / 15;
                 total += perma;
                 count++;
             });
@@ -550,12 +569,12 @@
                     time: d.time,
                     opportunityChosen: d.opportunityChosen,
                     opportunityFlexible: d.opportunityFlexible,
-                    wellbeing_P: d.wellbeing.positiveEmotion,
-                    wellbeing_E: d.wellbeing.engagement,
-                    wellbeing_R: d.wellbeing.relationships,
-                    wellbeing_M: d.wellbeing.meaning,
-                    wellbeing_A: d.wellbeing.accomplishment,
-                    wellbeing_N: d.wellbeing.negativeEmotion,
+                    wellbeing_P1: d.wellbeing.P1, wellbeing_P2: d.wellbeing.P2, wellbeing_P3: d.wellbeing.P3,
+                    wellbeing_E1: d.wellbeing.E1, wellbeing_E2: d.wellbeing.E2, wellbeing_E3: d.wellbeing.E3,
+                    wellbeing_R1: d.wellbeing.R1, wellbeing_R2: d.wellbeing.R2, wellbeing_R3: d.wellbeing.R3,
+                    wellbeing_M1: d.wellbeing.M1, wellbeing_M2: d.wellbeing.M2, wellbeing_M3: d.wellbeing.M3,
+                    wellbeing_A1: d.wellbeing.A1, wellbeing_A2: d.wellbeing.A2, wellbeing_A3: d.wellbeing.A3,
+                    wellbeing_N1: d.wellbeing.N1, wellbeing_N2: d.wellbeing.N2, wellbeing_N3: d.wellbeing.N3,
                 };
             }),
             globalReflection: {
@@ -567,45 +586,17 @@
                 infoAccess3: getLikertValue('infoAccess3'),
                 // Q3: 정보원 (checkboxes)
                 infoSources: infoSources,
-                // Q4: 정보 사막 (open-ended)
-                infoDesertExperience: $('#infoDesertExperience')?.value || '',
-                // Q5: 시간 활용도 (Likert)
+                // Q4: 시간 활용도 (Likert)
                 timeUse1: getLikertValue('timeUse1'),
                 timeUse2: getLikertValue('timeUse2'),
                 timeUse3: getLikertValue('timeUse3'),
                 timeUse4: getLikertValue('timeUse4'),
-                // Q6: 시간 설계 제안 (open-ended)
-                timeDesignSuggestion: $('#timeDesignSuggestion')?.value || '',
-                // Q7: 기회 인식 (Likert)
+                // Q5: 기회 인식 (Likert)
                 oppAccess1: getLikertValue('oppAccess1'),
                 oppAccess2: getLikertValue('oppAccess2'),
                 oppAccess3: getLikertValue('oppAccess3'),
                 oppAccess4: getLikertValue('oppAccess4'),
-                // Q8: 기회 구조 개선 (open-ended)
-                oppImproveSuggestion: $('#oppImproveSuggestion')?.value || '',
-                // Q9: PERMA 웰빙 (Likert)
-                wb_P: getLikertValue('wb_P'),
-                wb_E: getLikertValue('wb_E'),
-                wb_R: getLikertValue('wb_R'),
-                wb_M: getLikertValue('wb_M'),
-                wb_A: getLikertValue('wb_A'),
-                wb_N: getLikertValue('wb_N'),
-                // Q10: 5대 핵심 가치 진단 (Likert)
-                cv_A: getLikertValue('cv_A'),
-                cv_B: getLikertValue('cv_B'),
-                cv_C: getLikertValue('cv_C'),
-                cv_D: getLikertValue('cv_D'),
-                cv_E: getLikertValue('cv_E'),
-                cv_F: getLikertValue('cv_F'),
-                cv_G: getLikertValue('cv_G'),
-                cv_H: getLikertValue('cv_H'),
-                cv_I: getLikertValue('cv_I'),
-                cv_J: getLikertValue('cv_J'),
-                // Q11: 학교 경험 종합 성찰 (open-ended)
-                schoolExperienceReflection: $('#schoolExperienceReflection')?.value || '',
-                // Q12: 가장 변화 필요한 핵심 가치 (single choice)
-                mostNeededValue: getLikertValue('mostNeededValue'),
-                // Q13: 이상적인 하루 (open-ended)
+                // Q6: 이상적인 하루 (open-ended)
                 idealDay: $('#idealDay')?.value || '',
             },
         };
@@ -621,6 +612,7 @@
     function exportCSV() {
         const data = collectAllData();
         const ts = data.timestamp;
+        const r = data.globalReflection;
 
         // Episodes sheet
         let csv = 'sep=,\n';
@@ -630,15 +622,28 @@
             csv += `${i + 1},${ep.startTime},${ep.endTime},"${ep.activity}","${ep.location}","${ep.companion}"\n`;
         });
 
-        csv += '\n=== 심층 진단 ===\n';
-        csv += '에피소드,활동,정보,정보원,시간,기회_선택,기회_유연,즐거움,자신감,불안함,지루함\n';
+        csv += '\n=== 심층 진단 (PERMA) ===\n';
+        csv += '에피소드,활동,정보,정보원,정보원기타,시간,기회_선택,기회_유연,P1,P2,P3,E1,E2,E3,R1,R2,R3,M1,M2,M3,A1,A2,A3,N1,N2,N3\n';
         data.diagnoses.forEach((d) => {
-            csv += `${d.episodeId},"${d.activity}",${d.information || ''},"${d.informationSource}",${d.time || ''},${d.opportunityChosen || ''},${d.opportunityFlexible || ''},${d.wellbeing_joy},${d.wellbeing_confidence},${d.wellbeing_anxiety},${d.wellbeing_boredom}\n`;
+            const srcs = Array.isArray(d.informationSources) ? d.informationSources.join(';') : '';
+            csv += `${d.episodeId},"${d.activity}",${d.information || ''},"${srcs}","${d.informationSourceEtc || ''}",${d.time || ''},${d.opportunityChosen || ''},${d.opportunityFlexible || ''},${d.wellbeing_P1},${d.wellbeing_P2},${d.wellbeing_P3},${d.wellbeing_E1},${d.wellbeing_E2},${d.wellbeing_E3},${d.wellbeing_R1},${d.wellbeing_R2},${d.wellbeing_R3},${d.wellbeing_M1},${d.wellbeing_M2},${d.wellbeing_M3},${d.wellbeing_A1},${d.wellbeing_A2},${d.wellbeing_A3},${d.wellbeing_N1},${d.wellbeing_N2},${d.wellbeing_N3}\n`;
         });
 
-        csv += '\n=== 종합 진단 ===\n';
-        csv += `가장 큰 장벽,${data.globalReflection.biggestBarrier || ''}\n`;
-        csv += `학교에 바라는 한 마디,"${data.globalReflection.schoolMessage || ''}"\n`;
+        csv += '\n=== 종합 의견 ===\n';
+        csv += `가장 큰 장벽,${r.biggestBarrier || ''}\n`;
+        csv += `정보접근성1,${r.infoAccess1 || ''}\n`;
+        csv += `정보접근성2,${r.infoAccess2 || ''}\n`;
+        csv += `정보접근성3,${r.infoAccess3 || ''}\n`;
+        csv += `정보원,"${(r.infoSources || []).join(';')}"\n`;
+        csv += `시간활용1,${r.timeUse1 || ''}\n`;
+        csv += `시간활용2,${r.timeUse2 || ''}\n`;
+        csv += `시간활용3,${r.timeUse3 || ''}\n`;
+        csv += `시간활용4,${r.timeUse4 || ''}\n`;
+        csv += `기회인식1,${r.oppAccess1 || ''}\n`;
+        csv += `기회인식2,${r.oppAccess2 || ''}\n`;
+        csv += `기회인식3,${r.oppAccess3 || ''}\n`;
+        csv += `기회인식4,${r.oppAccess4 || ''}\n`;
+        csv += `이상적인하루,"${r.idealDay || ''}"\n`;
         csv += `응답 시각,${ts}\n`;
 
         const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -888,8 +893,15 @@
         });
 
         backToPart2Btn.addEventListener('click', () => {
-            $('#part2Selection').style.display = 'block';
-            $('#part2Diagnosis').style.display = 'none';
+            // If diagnoses already exist, show the diagnosis view instead of selection
+            const hasDiagnoses = Object.keys(state.diagnoses).length > 0;
+            if (hasDiagnoses) {
+                $('#part2Selection').style.display = 'none';
+                $('#part2Diagnosis').style.display = 'block';
+            } else {
+                $('#part2Selection').style.display = 'block';
+                $('#part2Diagnosis').style.display = 'none';
+            }
             goToPart(2);
         });
 
@@ -902,8 +914,8 @@
             await submitToBackend(data);
         });
 
-        exportJsonBtn.addEventListener('click', exportJSON);
-        exportCsvBtn.addEventListener('click', exportCSV);
+        exportJsonBtn?.addEventListener('click', exportJSON);
+        exportCsvBtn?.addEventListener('click', exportCSV);
 
         // Barrier options
         setupBarrierOptions();
@@ -945,10 +957,10 @@
                 state.diagnoses[epId][field] = checked.value;
             }
         });
-        diagnosisForms.querySelectorAll('.info-source').forEach((input) => {
+        diagnosisForms.querySelectorAll('.info-source-etc').forEach((input) => {
             const epId = parseInt(input.dataset.ep);
             if (state.diagnoses[epId]) {
-                state.diagnoses[epId].informationSource = input.value;
+                state.diagnoses[epId].informationSourceEtc = input.value;
             }
         });
         diagnosisForms.querySelectorAll('input[type="range"]').forEach((slider) => {

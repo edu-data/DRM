@@ -1,9 +1,8 @@
 /* =========================================================================
-   DRM Survey - Google Apps Script Backend (PERMA + 5대 핵심 가치 적용)
+   DRM Survey - Google Apps Script Backend
    Sheets: Responses, Episodes, Diagnoses
-   - PERMA 웰빙: P(긍정정서), E(몰입), R(관계), M(의미), A(성취), N(부정정서)
-   - 5대 핵심 가치: cv_A~cv_J (10개 영역)
-   - Q11: 학교 경험 성찰, Q12: 가장 변화 필요한 가치, Q13: 이상적 하루
+   - PERMA 웰빙 (에피소드별): P(긍정정서), E(몰입), R(관계), M(의미), A(성취), N(부정정서)
+   - 종합 의견: Q1~Q6
    ========================================================================= */
 
 const ADMIN_PASSWORD = 'drm2026admin';
@@ -23,12 +22,10 @@ function doPost(e) {
     const respHeaders = [
       'Timestamp', 'RespondentID', 'PhoneNumber', 'EpisodeCount', 'DiagnosisCount',
       'Barrier',
-      'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoSources', 'InfoDesert',
-      'TimeUse1', 'TimeUse2', 'TimeUse3', 'TimeUse4', 'TimeDesign',
-      'OppAccess1', 'OppAccess2', 'OppAccess3', 'OppAccess4', 'OppImprove',
-      'WB_P', 'WB_E', 'WB_R', 'WB_M', 'WB_A', 'WB_N',
-      'CV_A', 'CV_B', 'CV_C', 'CV_D', 'CV_E', 'CV_F', 'CV_G', 'CV_H', 'CV_I', 'CV_J',
-      'SchoolReflection', 'MostNeededValue', 'IdealDay'
+      'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoSources',
+      'TimeUse1', 'TimeUse2', 'TimeUse3', 'TimeUse4',
+      'OppAccess1', 'OppAccess2', 'OppAccess3', 'OppAccess4',
+      'IdealDay'
     ];
 
     var respSheet = getOrCreateSheet(ss, 'Responses', respHeaders);
@@ -42,17 +39,8 @@ function doPost(e) {
       reflection.biggestBarrier || '',
       reflection.infoAccess1 || '', reflection.infoAccess2 || '', reflection.infoAccess3 || '',
       Array.isArray(reflection.infoSources) ? reflection.infoSources.join(', ') : '',
-      reflection.infoDesertExperience || '',
       reflection.timeUse1 || '', reflection.timeUse2 || '', reflection.timeUse3 || '', reflection.timeUse4 || '',
-      reflection.timeDesignSuggestion || '',
       reflection.oppAccess1 || '', reflection.oppAccess2 || '', reflection.oppAccess3 || '', reflection.oppAccess4 || '',
-      reflection.oppImproveSuggestion || '',
-      reflection.wb_P || '', reflection.wb_E || '', reflection.wb_R || '',
-      reflection.wb_M || '', reflection.wb_A || '', reflection.wb_N || '',
-      reflection.cv_A || '', reflection.cv_B || '', reflection.cv_C || '', reflection.cv_D || '', reflection.cv_E || '',
-      reflection.cv_F || '', reflection.cv_G || '', reflection.cv_H || '', reflection.cv_I || '', reflection.cv_J || '',
-      reflection.schoolExperienceReflection || '',
-      reflection.mostNeededValue || '',
       reflection.idealDay || ''
     ]);
 
@@ -70,7 +58,8 @@ function doPost(e) {
     var diagHeaders = [
       'RespondentID', 'EpisodeID', 'Activity', 'Information', 'InformationSources', 'InformationSourceEtc',
       'TimePerception', 'OpportunityChosen', 'OpportunityFlexible',
-      'WB_P', 'WB_E', 'WB_R', 'WB_M', 'WB_A', 'WB_N'
+      'P1', 'P2', 'P3', 'E1', 'E2', 'E3', 'R1', 'R2', 'R3',
+      'M1', 'M2', 'M3', 'A1', 'A2', 'A3', 'N1', 'N2', 'N3'
     ];
     var diagSheet = getOrCreateSheet(ss, 'Diagnoses', diagHeaders);
     diagnoses.forEach(function(d) {
@@ -80,7 +69,12 @@ function doPost(e) {
         respondentId, d.episodeId, d.activity || '',
         d.information || '', infoSrc, infoSrcEtc, d.time || '',
         d.opportunityChosen || '', d.opportunityFlexible || '',
-        d.wellbeing_P, d.wellbeing_E, d.wellbeing_R, d.wellbeing_M, d.wellbeing_A, d.wellbeing_N
+        d.wellbeing_P1, d.wellbeing_P2, d.wellbeing_P3,
+        d.wellbeing_E1, d.wellbeing_E2, d.wellbeing_E3,
+        d.wellbeing_R1, d.wellbeing_R2, d.wellbeing_R3,
+        d.wellbeing_M1, d.wellbeing_M2, d.wellbeing_M3,
+        d.wellbeing_A1, d.wellbeing_A2, d.wellbeing_A3,
+        d.wellbeing_N1, d.wellbeing_N2, d.wellbeing_N3
       ]);
     });
 
