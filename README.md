@@ -48,7 +48,7 @@ PART 2. 에피소드별 심층 진단 (PERMA Well-being & 3-Lens)
 
 PART 3. 종합 의견 (Global Reflection) — 6문항
    ├─ Q1. 가장 큰 장벽 (정보/시간/기회)
-   ├─ Q2. 정보 접근성 (Likert 7점 × 3문항)
+   ├─ Q2. 정보 접근성 (Likert 7점 × 4문항)
    ├─ Q3. 정보 획득 채널 (다중선택 체크박스)
    ├─ Q4. 시간 활용도 (Likert 7점 × 4문항)
    ├─ Q5. 기회 접근성 (Likert 7점 × 4문항)
@@ -179,8 +179,8 @@ flowchart LR
 
 1. **Step 1 — 일과 재구성:** 전날 일과를 10~15개 에피소드로 구분
 2. **Step 2 — 3차원 진단:** 각 에피소드에 정보·시간·기회 진단
-3. **Step 3 — 웰빙 측정:** 긍정/부정 정서 7점 척도 기록
-4. **Step 4 — 종합 의견:** 10개 문항으로 정보·시간·기회·웰빙 종합 평가
+3. **Step 3 — 웰빙 측정:** PERMA-Profiler (Butler & Kern, 2016) 기반 18문항 7점 척도
+4. **Step 4 — 종합 의견:** 6개 문항으로 정보·시간·기회 종합 평가
 
 ---
 
@@ -208,6 +208,40 @@ flowchart LR
 | 내보내기 | Blob API (JSON/CSV) |
 | 배포 | GitHub Pages |
 | GAS 배포 | clasp CLI (Google Apps Script CLI) |
+
+---
+
+## 📌 버전 변경 이력
+
+### v1.3 — 2026-03-16 (PERMA-Profiler 기반 문항 교체)
+
+- **PERMA 18문항을 Butler & Kern (2016) PERMA-Profiler 원문 기반으로 교체**
+  - P: 기쁨(joyful) / 긍정적 기분(positive) / 만족감(contented)
+  - E: 빠져들었다(absorbed) / 시간무감(lost track of time) / 흥미와 관심(excited & interested)
+  - R: 도움과 지지(help & support) / 사랑받음(loved) / 관계 만족(satisfied with relationships)
+  - M: 의미+목적(purposeful & meaningful) / 가치(valuable & worthwhile) / 방향감(sense of direction)
+  - A: 목표 진전(making progress) / 목표 달성(achieve goals) / 책임 수행(handle responsibilities)
+  - N: 불안(anxious) / 화남(angry) / 슬픔(sad)
+
+### v1.2 — 2026-03-16 (정보·기회 문항 어제 경험 기반 전환)
+
+- Q2 정보 접근성: 3문항 → 4문항으로 확장, "어제" 경험 기반 state 측정으로 전환
+- Q5 기회 인식: 4문항 모두 "어제" 경험 기반으로 전환
+- Q4 시간 활용도: trait → state 측정 전환, 오타 수정, PERMA E와의 중복 제거
+
+### v1.1 — 2026-03-16 (신뢰도·타당도 기반 문항 개선)
+
+- 이중 질문(double-barreled) 해소, 구인 오염 제거, 문항 간 중복 해소
+- 역방향 문항 정방향 통일 (infoAccess3)
+- 추상적 문항 구체화 (A1, oppAccess3, oppAccess4)
+
+### v1.0 — 2026-03-16 (초기 구조 개편)
+
+- PERMA 웰빙: 하위요인당 1문항 → 3문항으로 확장 (6 → 18문항)
+- PART 3 "종합 진단 및 의견" → "종합 의견"으로 개명
+- Q4(정보사막), Q6(시간설계), Q8(기회구조), Q9(전반적 PERMA) 삭제
+- 설문 안내문 간소화
+- 5대 가치 관련 문항 삭제
 
 ---
 
