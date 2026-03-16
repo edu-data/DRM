@@ -22,7 +22,7 @@ function doPost(e) {
     const respHeaders = [
       'Timestamp', 'RespondentID', 'PhoneNumber', 'EpisodeCount', 'DiagnosisCount',
       'Barrier',
-      'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoSources',
+      'InfoAccess1', 'InfoAccess2', 'InfoAccess3', 'InfoAccess4', 'InfoSources',
       'TimeUse1', 'TimeUse2', 'TimeUse3', 'TimeUse4',
       'OppAccess1', 'OppAccess2', 'OppAccess3', 'OppAccess4',
       'IdealDay'
@@ -37,7 +37,7 @@ function doPost(e) {
       episodes.length,
       diagnoses.length,
       reflection.biggestBarrier || '',
-      reflection.infoAccess1 || '', reflection.infoAccess2 || '', reflection.infoAccess3 || '',
+      reflection.infoAccess1 || '', reflection.infoAccess2 || '', reflection.infoAccess3 || '', reflection.infoAccess4 || '',
       Array.isArray(reflection.infoSources) ? reflection.infoSources.join(', ') : '',
       reflection.timeUse1 || '', reflection.timeUse2 || '', reflection.timeUse3 || '', reflection.timeUse4 || '',
       reflection.oppAccess1 || '', reflection.oppAccess2 || '', reflection.oppAccess3 || '', reflection.oppAccess4 || '',

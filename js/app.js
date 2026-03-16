@@ -584,6 +584,7 @@
                 infoAccess1: getLikertValue('infoAccess1'),
                 infoAccess2: getLikertValue('infoAccess2'),
                 infoAccess3: getLikertValue('infoAccess3'),
+                infoAccess4: getLikertValue('infoAccess4'),
                 // Q3: 정보원 (checkboxes)
                 infoSources: infoSources,
                 // Q4: 시간 활용도 (Likert)
@@ -634,6 +635,7 @@
         csv += `정보접근성1,${r.infoAccess1 || ''}\n`;
         csv += `정보접근성2,${r.infoAccess2 || ''}\n`;
         csv += `정보접근성3,${r.infoAccess3 || ''}\n`;
+        csv += `정보접근성4,${r.infoAccess4 || ''}\n`;
         csv += `정보원,"${(r.infoSources || []).join(';')}"\n`;
         csv += `시간활용1,${r.timeUse1 || ''}\n`;
         csv += `시간활용2,${r.timeUse2 || ''}\n`;
