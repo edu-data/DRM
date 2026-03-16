@@ -417,7 +417,7 @@
         ${buildSlider(id, 'R3', '🤝 R3 — 함께한 사람들과의 관계가 만족스러웠다')}
         ${buildSlider(id, 'M1', '💡 M1 — 이 활동이 의미 있고 목적이 있었다')}
         ${buildSlider(id, 'M2', '💡 M2 — 이 활동이 가치 있는 일이라고 느꼈다')}
-        ${buildSlider(id, 'M3', '💡 M3 — 이 활동에 방향감을 가지고 참여했다')}
+        ${buildSlider(id, 'M3', '💡 M3 — 이 활동을 왜 하는지 알고 있었다')}
         ${buildSlider(id, 'A1', '🏆 A1 — 목표를 향해 진전하고 있다고 느꼈다')}
         ${buildSlider(id, 'A2', '🏆 A2 — 중요한 목표를 이루어 냈다고 느꼈다')}
         ${buildSlider(id, 'A3', '🏆 A3 — 해야 할 일을 잘 해낼 수 있었다')}
