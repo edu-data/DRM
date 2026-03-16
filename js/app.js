@@ -406,24 +406,24 @@
           이 활동 중 느꼈던 경험을 점수로 매겨 주세요. (1점: 전혀 아님 ~ 7점: 매우 그렇다)
         </p>
 
-        ${buildSlider(id, 'P1', '😊 P1 — 이 활동 중 즐거움·기쁨을 느꼈다')}
-        ${buildSlider(id, 'P2', '😊 P2 — 이 활동 중 마음이 편안했다')}
-        ${buildSlider(id, 'P3', '😊 P3 — 이 활동 중 행복하다고 느꼈다')}
-        ${buildSlider(id, 'E1', '🎯 E1 — 이 활동에 완전히 몰입했다')}
+        ${buildSlider(id, 'P1', '😊 P1 — 이 활동 중 기쁨을 느꼈다')}
+        ${buildSlider(id, 'P2', '😊 P2 — 이 활동 중 긍정적인 기분이었다')}
+        ${buildSlider(id, 'P3', '😊 P3 — 이 활동 중 만족감을 느꼈다')}
+        ${buildSlider(id, 'E1', '🎯 E1 — 이 활동에 완전히 빠져들었다')}
         ${buildSlider(id, 'E2', '🎯 E2 — 시간 가는 줄 모를 정도로 집중했다')}
-        ${buildSlider(id, 'E3', '🎯 E3 — 이 활동에 깊이 관여하고 흥미를 느꼈다')}
-        ${buildSlider(id, 'R1', '🤝 R1 — 함께한 사람과 긍정적 관계를 느꼈다')}
-        ${buildSlider(id, 'R2', '🤝 R2 — 누군가로부터 지지받고 있다고 느꼈다')}
-        ${buildSlider(id, 'R3', '🤝 R3 — 다른 사람에게 도움이 되거나 연결됨을 느꼈다')}
-        ${buildSlider(id, 'M1', '💡 M1 — 이 활동이 의미 있다고 느꼈다')}
+        ${buildSlider(id, 'E3', '🎯 E3 — 이 활동에 흥미와 관심을 느꼈다')}
+        ${buildSlider(id, 'R1', '🤝 R1 — 필요할 때 도움과 지지를 받을 수 있었다')}
+        ${buildSlider(id, 'R2', '🤝 R2 — 사랑받고 있다고 느꼈다')}
+        ${buildSlider(id, 'R3', '🤝 R3 — 함께한 사람들과의 관계가 만족스러웠다')}
+        ${buildSlider(id, 'M1', '💡 M1 — 이 활동이 의미 있고 목적이 있었다')}
         ${buildSlider(id, 'M2', '💡 M2 — 이 활동이 가치 있는 일이라고 느꼈다')}
-        ${buildSlider(id, 'M3', '💡 M3 — 이 활동에 목적의식을 갖고 참여했다')}
-        ${buildSlider(id, 'A1', '🏆 A1 — 무언가를 이루어 냈다고 느꼈다')}
-        ${buildSlider(id, 'A2', '🏆 A2 — 목표를 향해 진전하고 있다고 느꼈다')}
-        ${buildSlider(id, 'A3', '🏆 A3 — 내가 할 일을 잘 해냈다고 느꼈다')}
+        ${buildSlider(id, 'M3', '💡 M3 — 이 활동에 방향감을 가지고 참여했다')}
+        ${buildSlider(id, 'A1', '🏆 A1 — 목표를 향해 진전하고 있다고 느꼈다')}
+        ${buildSlider(id, 'A2', '🏆 A2 — 중요한 목표를 이루어 냈다고 느꼈다')}
+        ${buildSlider(id, 'A3', '🏆 A3 — 해야 할 일을 잘 해낼 수 있었다')}
         ${buildSlider(id, 'N1', '😰 N1 — 불안함을 느꼈다')}
-        ${buildSlider(id, 'N2', '😰 N2 — 지루함을 느꼈다')}
-        ${buildSlider(id, 'N3', '😰 N3 — 스트레스를 느꼈다')}
+        ${buildSlider(id, 'N2', '😰 N2 — 화가 났다')}
+        ${buildSlider(id, 'N3', '😰 N3 — 슬픔을 느꼈다')}
       `;
 
             // Bind radio groups
